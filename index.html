@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rashmi Gupta — AI Product Manager</title>
+<meta name="description" content="AI Product Manager. Building evaluation-driven LLM products that ship and work in production." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --bg-soft: #efece5;
+    --ink: #111110;
+    --ink-soft: #5a5a55;
+    --line: #d8d4ca;
+    --accent: #ff5b1f;
+    --accent-soft: #ffe6da;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .italic { font-style: italic; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  nav.top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(246, 244, 239, 0.7);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.top.scrolled { border-bottom-color: var(--line); }
+  nav.top .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav.top .brand {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  nav.top .links {
+    display: flex;
+    gap: 28px;
+  }
+  nav.top .links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    position: relative;
+    padding: 4px 0;
+  }
+  nav.top .links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--ink);
+    transition: width 0.3s ease;
+  }
+  nav.top .links a:hover::after { width: 100%; }
+
+  /* HERO */
+  section.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 32px 80px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .hero-tag .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 11vw, 180px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .hero h1 .accent { color: var(--accent); }
+  .hero-sub {
+    margin-top: 48px;
+    max-width: 640px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-weight: 300;
+  }
+  .hero-meta {
+    margin-top: 64px;
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* MARQUEE */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    margin: 80px 0;
+    background: var(--bg-soft);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 64px;
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    color: var(--ink);
+  }
+  .marquee-track span { display: inline-flex; align-items: center; gap: 64px; }
+  .marquee-track span::after {
+    content: '✦';
+    color: var(--accent);
+    font-size: 24px;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-header .num {
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .section-header h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.02em;
+  }
+
+  section.about {
+    padding: 120px 32px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-grid p {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .about-grid p .em { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; }
+  .about-side {
+    border-left: 1px solid var(--line);
+    padding-left: 40px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .about-side h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    margin-bottom: 12px;
+    margin-top: 32px;
+    font-weight: 500;
+  }
+  .about-side h4:first-child { margin-top: 0; }
+
+  /* WORK */
+  section.work {
+    padding: 80px 32px 120px;
+  }
+  .work-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .work-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: padding 0.4s ease;
+  }
+  .work-item:hover { padding-left: 16px; }
+  .work-item:hover .work-arrow { transform: translateX(8px); color: var(--accent); }
+  .work-item:first-child { border-top: 1px solid var(--line); }
+  .work-num { font-size: 14px; color: var(--ink-soft); }
+  .work-meta { display: flex; flex-direction: column; gap: 8px; }
+  .work-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .work-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+  .work-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink-soft);
+  }
+  .work-arrow {
+    font-size: 24px;
+    color: var(--ink-soft);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  /* CASE PANEL (modal) */
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 17, 16, 0.5);
+    z-index: 200;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .panel {
+    width: min(880px, 100%);
+    height: 100%;
+    background: var(--bg);
+    overflow-y: auto;
+    padding: 80px 64px 120px;
+  }
+  .panel-close {
+    position: sticky;
+    top: 0;
+    margin-left: auto;
+    margin-bottom: 32px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    transition: background 0.2s ease;
+  }
+  .panel-close:hover { background: var(--ink); color: var(--bg); }
+  .panel h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .panel-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 40px;
+    font-size: 13px;
+  }
+  .panel-meta div { display: flex; flex-direction: column; gap: 4px; }
+  .panel-meta .lbl { color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
+  .panel h4 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 48px 0 16px;
+    letter-spacing: -0.01em;
+  }
+  .panel p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .panel ul { margin: 0 0 16px 20px; }
+  .panel li { font-size: 17px; line-height: 1.65; margin-bottom: 8px; }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+  }
+  .metric {
+    padding: 24px;
+    background: var(--bg-soft);
+    border-radius: 4px;
+  }
+  .metric .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .metric .lbl {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* POCS — personal AI side builds */
+  section.pocs {
+    padding: 120px 32px;
+    position: relative;
+  }
+  .pocs-intro {
+    max-width: 720px;
+    margin-bottom: 56px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .pocs-intro strong { color: var(--ink); font-weight: 500; }
+  .pocs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .poc-card {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px 28px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .poc-card:hover {
+    background: var(--bg-soft);
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+  .poc-num {
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .poc-card h6 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+  .poc-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .poc-stack span {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--ink-soft);
+  }
+  .poc-card:hover .poc-stack span {
+    background: var(--bg);
+  }
+  .poc-summary {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  .poc-impact {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    margin-bottom: 20px;
+  }
+  .poc-cta {
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--ink);
+    border-radius: 100px;
+    transition: background 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .poc-cta:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .poc-callout {
+    margin-top: 56px;
+    padding: 28px 32px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 760px;
+  }
+  .poc-callout em { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 17px; color: var(--accent); }
+
+  /* TECHNICAL */
+  section.tech {
+    padding: 120px 32px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .tech-card {
+    background: var(--bg-soft);
+    padding: 40px 32px;
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  .tech-card:hover { background: var(--bg); }
+  .tech-card .icon {
+    font-family: 'Instrument Serif', serif;
+    font-size: 36px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    line-height: 1;
+  }
+  .tech-card h5 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .tech-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .tech-card .stack {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-family: 'Inter', monospace;
+  }
+  .tech-card .stack span {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 3px 8px;
+    background: var(--bg);
+    border-radius: 3px;
+    border: 1px solid var(--line);
+  }
+
+  /* WRITING */
+  section.writing {
+    padding: 120px 32px;
+  }
+  .essay-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .essay {
+    padding: 40px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--bg);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .essay:hover { background: var(--bg-soft); transform: translateY(-4px); }
+  .essay .date {
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+  .essay h5 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+  .essay p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .essay .read {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* CONTACT */
+  section.contact {
+    padding: 160px 32px;
+    text-align: center;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  section.contact h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(48px, 9vw, 140px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 48px;
+  }
+  section.contact h2 .italic { color: var(--accent); font-style: italic; }
+  .contact-cta {
+    display: inline-block;
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    color: var(--bg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bg);
+    padding-bottom: 4px;
+    margin-bottom: 48px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .contact-cta:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    font-size: 14px;
+  }
+  .contact-links a {
+    color: rgba(246, 244, 239, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .contact-links a:hover { color: var(--bg); }
+
+  footer {
+    padding: 32px;
+    background: var(--ink);
+    color: rgba(246, 244, 239, 0.4);
+    border-top: 1px solid rgba(246, 244, 239, 0.1);
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .container, section { padding-left: 20px; padding-right: 20px; }
+    nav.top .inner { padding: 14px 20px; }
+    nav.top .links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-side { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 32px; }
+    .work-item { grid-template-columns: 32px 1fr; gap: 16px; padding: 28px 0; }
+    .work-arrow { display: none; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .pocs-grid { grid-template-columns: 1fr; gap: 20px; }
+    .essay-grid { grid-template-columns: 1fr; gap: 20px; }
+    .essay { padding: 28px; }
+    .panel { padding: 40px 24px 80px; }
+    .panel h3 { font-size: 36px; }
+    .metric-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 24px; }
+    section.about, section.work, section.tech, section.writing, section.pocs { padding: 80px 20px; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.17?deps=react@18.3.1"
+  }
+}
+</script>
+
+<script type="module">
+import React, { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+
+const e = React.createElement;
+
+// === DATA — replace these with your real content ===
+const PROFILE = {
+  name: 'Rashmi Gupta',
+  role: 'Senior Product Manager · AI & Automation',
+  tagline: '10+ years shipping enterprise commerce, IoT, and back-office automation. $70M+ in cost optimization, $28M+ in revenue growth. Now bringing AI and LLM agents to the workflows I\'ve spent my career inside.',
+  location: 'Charlotte, NC',
+  available: 'Available now — open to senior / staff AI PM roles',
+  email: 'rashmigupta1109@gmail.com',
+  phone: '(980) 729-3180',
+  links: {
+    linkedin: 'https://linkedin.com/in/[your-handle]',
+    github: 'https://github.com/[your-handle]',
+    email: 'mailto:rashmigupta1109@gmail.com',
+  },
+};
+
+const ABOUT = {
+  intro: [
+    "I'm a Senior Product Manager with 10+ years shipping SaaS, eCommerce, IoT, and back-office automation. Across Hoonigan Industries and ADT, I've delivered $70M+ in cost optimization and $28M+ in revenue growth — through enterprise product transformation, RPA-driven automation, and the kind of unglamorous integration work that makes ambitious roadmaps actually ship.",
+    "What separates me from most PMs claiming to be \"AI PMs\" is range and receipts. I've owned B2B and B2C commerce platforms, IoT field-tech apps with 95% technician adoption, Salesforce CRM/CPQ/FSL deployments, UiPath RPA bots in production, and AWS-integrated data platforms. I've reported to CEOs, CIOs, and CROs — and managed PMs and BAs on the way up.",
+    "Now I'm focused on the next chapter: bringing AI agents and LLM-powered workflows to the back-office, automation, and commerce surfaces I've spent a decade inside. Not just talking about it — I've shipped three personal AI POCs (RAG, MCP, real-time ingestion) on my own time to prove I can do the work, not just direct it.",
+  ],
+  currently: 'Most recently Sr. PM, Hoonigan Industries (2022–2026)',
+  previously: [
+    'Hoonigan Industries — Sr. Product Manager (2022–2026)',
+    'ADT LLC — Product Manager (2019–2022)',
+    'ADT LLC — Senior Business Analyst (2016–2019)',
+  ],
+  beliefs: [
+    'RPA bots taught me what AI agents inherit. Most "agent" projects are just RPA in better clothes — until they aren\'t.',
+    'Back-office automation is where AI actually pays for itself. The chatbots get the press; the workflows get the ROI.',
+    'Build it before you talk about it. I shipped my AI POCs on personal time, not because the day job demanded it.',
+  ],
+};
+
+const CASE_STUDIES = [
+  {
+    num: '01',
+    title: 'Modernizing a B2B commerce platform — and the lead-gen system around it',
+    summary: 'Owned the DealerLine B2B eCommerce roadmap and the Salesforce-based Credit App for lead generation at Hoonigan Industries. Migrated the commerce stack off Salesforce Commerce Cloud to Adobe Commerce, drove $1M+ in annual licensing savings, and shipped 20+ improvements across a $2M+ dealer-data program.',
+    tags: ['B2B Commerce', 'Salesforce', 'Adobe Commerce', 'AWS', 'Lead-to-Sale'],
+    role: 'Sr. Product Manager',
+    team: 'Multi-team: Sales, AR, Finance, Compliance, 20+ vendor resources',
+    timeline: 'Aug 2022 – Jan 2026',
+    year: '2022–2026',
+    metrics: [
+      { num: '$1M+', lbl: 'Annual licensing savings (SCC → Adobe Commerce)' },
+      { num: '+7.5%', lbl: 'YTD blowout sales lift via inventory-driven promotions' },
+      { num: '$2M+', lbl: 'Dealer data program owned (20+ vendor resources)' },
+    ],
+    sections: [
+      { h: 'The problem', body: 'Hoonigan\'s dealer ecosystem was fragmented across legacy commerce, CRM, and back-office systems. The B2B commerce experience ran on Salesforce Commerce Cloud at significant licensing cost; lead capture for dealer credit applications was disconnected from Sales, AR, Finance, and Compliance — each region had its own version of the workflow. Dealer-facing apps were sitting on aging tech (Angular v8, Node.js v12) and the dealer-data program had grown faster than its tooling.' },
+      { h: 'Approach', body: 'I owned the roadmap end-to-end: cross-regional alignment with RVPs to prioritize backlog and write user stories, ownership of dashboards and Salesforce admin, and direct exec engagement with the CEO, CIO, and CRO to resolve roadmap tradeoffs across the multi-product portfolio. On the platform side, I led the SCC → Adobe Commerce migration and the AWS-integrated dealer-data work (Cognito, CloudWatch, S3, Athena) to streamline costs and unlock data for promotions.' },
+      { h: 'What shipped', body: 'Salesforce-based Credit App for lead generation, aligning Sales / AR / Finance / Compliance into one workflow. SCC-to-Adobe Commerce migration delivering $1M+ in annual licensing savings. A coordinated tech upgrade (Angular v8→v16, Node.js v12→v18) plus 20+ dealer-app improvements. Promotions powered by warehouse inventory data lifted blowout sales by 7.5% YTD.' },
+      { h: 'What I\'d do differently', body: 'I\'d invest sooner in a unified data model across the dealer-data apps. Each capability shipped well on its own, but reporting at the program level lagged because we kept stitching data across surfaces. The agent and AI thesis I\'m developing now starts exactly here: this is a workflow shaped by AI agents, not by another rebuild.' },
+    ],
+  },
+  {
+    num: '02',
+    title: 'Cutting smart-home install time on the ADT–Google partnership',
+    summary: 'Led the IoT-enabled ADT+ Tech App and managed the PM team aligning the ADT–Google partnership for Field Operations. Drove 95% technician adoption on the Google Installer App and reduced projected install times by 35 minutes per job — across thousands of field technicians.',
+    tags: ['IoT', 'Field Operations', 'Google Partnership', 'Mobile', 'Salesforce'],
+    role: 'Product Manager (managed 3 PMs)',
+    team: 'Firmware, UX, Field Ops, Salesforce, mobile platform teams',
+    timeline: 'Jul 2019 – Aug 2022',
+    year: '2019–2022',
+    metrics: [
+      { num: '−35 min', lbl: 'Projected install time per job' },
+      { num: '95%', lbl: 'Technician adoption on Google Installer App' },
+      { num: '3 PMs', lbl: 'Managed across the partnership roadmap' },
+    ],
+    sections: [
+      { h: 'The problem', body: 'Smart-home installs were complex and time-expensive — every minute on a job site costs ADT, frustrates customers, and limits how many installs a technician can complete in a day. The ADT–Google partnership added new hardware and new workflows on top of a field-tech app already stretched across e-commerce, in-store sales support, and post-sale service surfaces.' },
+      { h: 'Approach', body: 'Partnered closely with firmware and UX teams to integrate smart-home hardware into the ADT+ Tech App so technicians could provision devices in-flow rather than hopping between apps. On the Google Installer App, I drove adoption through targeted training, hands-on usability testing with field technicians, and tight feedback loops with the FSL/Salesforce teams. I also leveraged Salesforce analytics to optimize GTM strategies and improve customer engagement post-install.' },
+      { h: 'What shipped', body: 'A smart-home-aware ADT+ Tech App that cut projected install time by 35 minutes — multiplied across the field-tech population, that\'s meaningful margin. 95% adoption of the Google Installer App, well above typical first-year field-app adoption benchmarks. Omni-channel alignment across e-commerce, in-store, field-tech apps, and post-sale service.' },
+      { h: 'What I\'d do differently', body: 'Adoption training was the lever that unlocked usage, but I built it relatively late in the cycle. Next time I\'d treat field-tech change management as a first-class workstream from day one — not a launch-month activity. This experience deeply informed how I now think about AI rollouts: distribution and trust-building beat features for any internal-user product.' },
+    ],
+  },
+  {
+    num: '03',
+    title: '$28M in upsell revenue, RPA bots, and the Lead-to-Sale rebuild',
+    summary: 'As Sr. Business Analyst at ADT, partnered with Finance to launch payment integrations with Mizuho Bank, drove $28M in upsell revenue, championed the CPQ/FSL Salesforce migration, and led UiPath RPA proofs of concept that automated high-volume billing and dispute workflows. Cut Authorized Dealer call volume by 60%.',
+    tags: ['Financing', 'RPA · UiPath', '$28M Revenue', 'Salesforce CPQ/FSL', 'Compliance'],
+    role: 'Senior Business Analyst (managed 5 BAs)',
+    team: 'Finance, UX, Legal, Engineering, Mizuho Bank',
+    timeline: 'May 2016 – Jun 2019',
+    year: '2016–2019',
+    metrics: [
+      { num: '$28M', lbl: 'Upsell revenue from financing integration' },
+      { num: '−60%', lbl: 'Call volume reduction (Authorized Dealer program)' },
+      { num: '5 BAs', lbl: 'Direct reports across the BA team' },
+    ],
+    sections: [
+      { h: 'The problem', body: 'ADT\'s back office was buried under high-volume billing and cancellation disputes, manual financing flows, and a Lead-to-Sale process that had never been built for digital. The Authorized Dealer program was generating phone-call volume that didn\'t scale. And ADT had no e-commerce platform of its own.' },
+      { h: 'Approach', body: 'Three concurrent threads. (1) Finance: partnered with Finance and Mizuho Bank to launch flexible financing using customer credit profiles to drive upsell. (2) Automation: ran UiPath RPA POCs targeting the highest-volume back-office workflows (billing disputes, cancellation handling) — the work that planted the seeds of my current AI thesis. (3) Platform: championed the Salesforce CPQ/FSL migration by mapping as-is/to-be workflows, and partnered with the C-suite to launch ADT\'s pilot e-commerce platform, redefining Lead-to-Sale for a scalable digital channel. Compliance (PCI, PII, ADA) ran across all three.' },
+      { h: 'What shipped', body: 'Mizuho-integrated financing drove $28M in upsell revenue. UiPath RPA automations cut Authorized Dealer call volume by 60%. The Salesforce migration delivered against a clear as-is/to-be map. ADT\'s pilot e-commerce platform launched as a scalable digital channel.' },
+      { h: 'What this taught me about the AI thesis I have today', body: 'The RPA bots were brittle. They worked beautifully when the screen didn\'t change and broke the moment it did. I learned firsthand which workflows generalize and which are stuck in rules — and now, with LLM agents, the bots can finally generalize. That\'s the through-line of my work and the reason my personal POCs all use Claude Code, MCP, and RAG.' },
+    ],
+  },
+];
+
+const POCS = [
+  {
+    n: '01',
+    title: 'AI Knowledge Base & Onboarding Assistant',
+    stack: ['RAG', 'AWS S3 + IAM', 'ChromaDB', 'Vector DB'],
+    summary: 'End-to-end AI assistant with secure S3 ingestion, role-based access, and ChromaDB retrieval. Real-time Q&A over internal documentation — designed to reduce SME dependency for onboarding and support workflows.',
+    impact: 'Reduced SME dependency for onboarding and support workflows.',
+    cta: 'Live Demo',
+    href: '#',
+  },
+  {
+    n: '02',
+    title: 'AI-Assisted Jira & Dev Workflow Automation',
+    stack: ['Atlassian MCP', 'LLM Orchestration', 'Claude Code'],
+    summary: 'AI-augmented PM → Dev workflow that enables natural-language ticketing, automated updates, and execution of UAT fixes via prompt-driven orchestration.',
+    impact: 'Reduced PM-to-dev turnaround time for low-effort changes through AI-driven automation.',
+    cta: 'GitHub',
+    href: '#',
+  },
+  {
+    n: '03',
+    title: 'Real-Time AI Knowledge Assistant',
+    stack: ['Live Ingestion', 'Zero-Setup RAG', 'Embeddings'],
+    summary: 'Chat-based assistant enabling real-time document ingestion, embedding, and querying within a single session — no pre-configured pipelines required.',
+    impact: 'Enables rapid prototyping and ad-hoc knowledge workflows without infrastructure setup.',
+    cta: 'Live Demo',
+    href: '#',
+  },
+];
+
+const TECH = [
+  { icon: '◇', h: 'AI workflows & MCP', p: 'Hands-on with Claude Code and Atlassian MCP. Built LLM-orchestrated workflows that translate natural-language intent into ticketed dev work and back-office actions.', stack: ['Claude Code', 'MCP Integration', 'LLM Orchestration'] },
+  { icon: '∞', h: 'RAG & knowledge systems', p: 'Built end-to-end RAG assistants with secure S3 ingestion, role-based access via IAM, and ChromaDB retrieval. Real-time and pre-indexed ingestion patterns.', stack: ['ChromaDB', 'Vector DB', 'AWS S3 + IAM', 'Embeddings'] },
+  { icon: '⌘', h: 'RPA → AI agent migration', p: 'Production UiPath RPA experience automating high-volume back-office workflows (billing, disputes). I know exactly where rules-based bots break and which workflows graduate to LLM agents.', stack: ['UiPath RPA', 'Workflow design', 'Process mapping'] },
+  { icon: '✦', h: 'Enterprise commerce & CRM', p: 'B2B and B2C commerce, end-to-end Lead-to-Sale, Salesforce CRM with CPQ and FSL. Led the migration from Salesforce Commerce Cloud to Adobe Commerce — $1M+ in licensing savings.', stack: ['Salesforce CRM/CPQ/FSL', 'Adobe Commerce', 'Magento', 'Lead-to-Sale'] },
+  { icon: '※', h: 'Cloud, data & integrations', p: 'AWS-integrated product planning across Cognito, CloudWatch, S3, Athena, and Glue. MuleSoft and payment-processor integrations. Built data-driven promotions using warehouse inventory.', stack: ['AWS', 'MuleSoft APIs', 'Payment Processors', 'SQL'] },
+  { icon: '⊹', h: 'Compliance, trust & change mgmt', p: 'Directed PCI, PII, and ADA compliance initiatives partnering with UX and legal. Drove 95% field-tech adoption through change management — the lever that actually ships internal AI.', stack: ['PCI / PII / ADA', 'Change management', 'Adoption strategy'] },
+];
+
+const ESSAYS = [
+  { date: 'Coming soon', h: 'From UiPath to LLM agents: what 10 years of automation taught me about AI', p: 'I shipped UiPath RPA bots in production back in 2017. They broke the moment a screen changed. Now LLM agents are stepping into the same workflows. Here\'s what carries over, what doesn\'t, and why most "agent" projects in 2026 are still solving 2017\'s problems.' },
+  { date: 'Coming soon', h: 'Why field operations is the most underrated AI surface in the enterprise', p: 'Field-tech apps, install workflows, and the human-in-the-loop ops surfaces I worked on at ADT — they have all the ingredients of a great agent product (clear actions, real ROI, narrow scope) and almost none of the noise.' },
+  { date: 'Coming soon', h: 'A PM\'s playbook for shipping AI POCs without engineering headcount', p: 'The lessons from building three AI POCs on personal time (Claude Code, MCP, RAG, ChromaDB). What you can do solo, where the abstractions break, and why every PM should ship one.' },
+  { date: 'Coming soon', h: 'B2B commerce in the agent era: what changes when buyers stop browsing', p: 'B2B catalogs, dealer portals, and credit/lead-gen flows were built for human navigation. They are about to be navigated by agents on behalf of buyers. Here\'s what breaks first.' },
+];
+
+// === COMPONENTS ===
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return e('nav', { className: 'top' + (scrolled ? ' scrolled' : '') },
+    e('div', { className: 'inner' },
+      e('div', { className: 'brand' }, PROFILE.name),
+      e('div', { className: 'links' },
+        e('a', { href: '#about' }, 'About'),
+        e('a', { href: '#work' }, 'Work'),
+        e('a', { href: '#pocs' }, 'AI POCs'),
+        e('a', { href: '#tech' }, 'Capabilities'),
+        e('a', { href: '#writing' }, 'Writing'),
+        e('a', { href: '#contact' }, 'Contact'),
+      )
+    )
+  );
+}
+
+function Hero() {
+  return e('section', { className: 'hero' },
+    e('div', { className: 'container' },
+      e(motion.div, {
+        className: 'hero-tag',
+        initial: { opacity: 0, y: 12 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.6 }
+      },
+        e('span', { className: 'dot' }),
+        e('span', null, PROFILE.available)
+      ),
+      e(motion.h1, {
+        initial: { opacity: 0, y: 24 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+      },
+        PROFILE.name.split(' ')[0], ' ',
+        e('span', { className: 'accent serif italic' }, PROFILE.name.split(' ').slice(1).join(' ') || ''),
+        e('br'),
+        e('span', { className: 'serif italic', style: { color: 'var(--ink-soft)' } }, PROFILE.role)
+      ),
+      e(motion.p, {
+        className: 'hero-sub',
+        initial: { opacity: 0, y: 16 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.8, delay: 0.3 }
+      }, PROFILE.tagline),
+      e(motion.div, {
+        className: 'hero-meta',
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        transition: { duration: 0.8, delay: 0.6 }
+      },
+        e('div', null, e('span', null, 'Based in'), e('strong', null, PROFILE.location)),
+        e('div', null, e('span', null, 'Currently'), e('strong', null, ABOUT.currently)),
+        e('div', null, e('span', null, 'Email'), e('strong', null, PROFILE.email)),
+      )
+    )
+  );
+}
+
+function Marquee() {
+  const items = ['Internal AI', 'RPA → Agents', 'Back-Office Automation', 'LLM Workflows', 'Eval-Driven', 'Enterprise', 'Trust & Audit', 'Human-in-the-Loop'];
+  return e('div', { className: 'marquee' },
+    e('div', { className: 'marquee-track' },
+      ...Array(2).fill(null).flatMap((_, i) =>
+        items.map((it, j) => e('span', { key: i + '-' + j }, it))
+      )
+    )
+  );
+}
+
+function SectionHeader({ num, title }) {
+  return e(motion.div, {
+    className: 'section-header',
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-80px' },
+    transition: { duration: 0.7 }
+  },
+    e('span', { className: 'num' }, num),
+    e('h2', null, title)
+  );
+}
+
+function About() {
+  return e('section', { id: 'about', className: 'about' },
+    e('div', { className: 'container' },
+      e(SectionHeader, { num: '— 01', title: e(React.Fragment, null, 'About', e('span', { className: 'serif italic', style: { color: 'var(--ink-soft)' } }, ' / philosophy')) }),
+      e('div', { className: 'about-grid' },
+        e(motion.div, {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-100px' },
+          transition: { duration: 0.8 }
+        },
+          ...ABOUT.intro.map((para, i) => e('p', { key: i }, para))
+        ),
+        e(motion.div, {
+          className: 'about-side',
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-100px' },
+          transition: { duration: 0.8, delay: 0.15 }
+        },
+          e('h4', null, 'Currently'),
+          e('div', null, ABOUT.currently),
+          e('h4', null, 'Previously'),
+          ...ABOUT.previously.map((p, i) => e('div', { key: i }, p)),
+          e('h4', null, 'Beliefs'),
+          ...ABOUT.beliefs.map((b, i) => e('div', { key: i, style: { fontStyle: 'italic', marginBottom: 6 } }, '"' + b + '"'))
+        )
+      )
+    )
+  );
+}
+
+function Work({ onOpen }) {
+  return e('section', { id: 'work', className: 'work' },
+    e('div', { className: 'container' },
+      e(SectionHeader, { num: '— 02', title: e(React.Fragment, null, 'Selected ', e('span', { className: 'serif italic' }, 'work')) }),
+      e('div', { className: 'work-list' },
+        ...CASE_STUDIES.map((cs, i) =>
+          e(motion.div, {
+            key: cs.num,
+            className: 'work-item',
+            onClick: () => onOpen(i),
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: '-60px' },
+            transition: { duration: 0.6, delay: i * 0.08 }
+          },
+            e('div', { className: 'work-num' }, cs.num),
+            e('div', { className: 'work-meta' },
+              e('div', { className: 'work-title' }, cs.title),
+              e('div', { className: 'work-tags' },
+                ...cs.tags.map((t, j) => e('span', { key: j, className: 'work-tag' }, t))
+              )
+            ),
+            e('div', { className: 'work-arrow' }, '→')
+          )
+        )
+      )
+    )
+  );
+}
+
+function Panel({ caseStudy, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+  return e(motion.div, {
+    className: 'panel-overlay',
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    onClick: onClose
+  },
+    e(motion.div, {
+      className: 'panel',
+      initial: { x: '100%' },
+      animate: { x: 0 },
+      exit: { x: '100%' },
+      transition: { type: 'spring', damping: 30, stiffness: 200 },
+      onClick: (e) => e.stopPropagation()
+    },
+      e('button', { className: 'panel-close', onClick: onClose }, '×'),
+      e('h3', null, caseStudy.title),
+      e('div', { className: 'panel-meta' },
+        e('div', null, e('span', { className: 'lbl' }, 'Role'), e('strong', null, caseStudy.role)),
+        e('div', null, e('span', { className: 'lbl' }, 'Team'), e('strong', null, caseStudy.team)),
+        e('div', null, e('span', { className: 'lbl' }, 'Timeline'), e('strong', null, caseStudy.timeline)),
+        e('div', null, e('span', { className: 'lbl' }, 'Year'), e('strong', null, caseStudy.year)),
+      ),
+      e('p', { style: { fontSize: 22, lineHeight: 1.5, color: 'var(--ink)', marginBottom: 32 } }, caseStudy.summary),
+      e('div', { className: 'metric-grid' },
+        ...caseStudy.metrics.map((m, i) =>
+          e('div', { key: i, className: 'metric' },
+            e('div', { className: 'num' }, m.num),
+            e('div', { className: 'lbl' }, m.lbl)
+          )
+        )
+      ),
+      ...caseStudy.sections.flatMap((s, i) => [
+        e('h4', { key: 'h' + i }, s.h),
+        e('p', { key: 'p' + i }, s.body)
+      ])
+    )
+  );
+}
+
+function Pocs() {
+  return e('section', { id: 'pocs', className: 'pocs' },
+    e('div', { className: 'container' },
+      e(SectionHeader, { num: '— 03', title: e(React.Fragment, null, 'AI side ', e('span', { className: 'serif italic' }, 'builds')) }),
+      e(motion.p, {
+        className: 'pocs-intro',
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: '-80px' },
+        transition: { duration: 0.7 }
+      },
+        'Three AI proofs of concept I built on personal time, applying ',
+        e('strong', null, 'Claude Code, MCP, RAG,'),
+        ' and ',
+        e('strong', null, 'ChromaDB'),
+        ' to the high-cost product and engineering workflows I\'ve spent my career inside. Live demos and source where applicable — these aren\'t deck-ware.'
+      ),
+      e('div', { className: 'pocs-grid' },
+        ...POCS.map((p, i) =>
+          e(motion.div, {
+            key: i,
+            className: 'poc-card',
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: '-40px' },
+            transition: { duration: 0.5, delay: i * 0.08 }
+          },
+            e('div', { className: 'poc-num' }, 'POC ' + p.n),
+            e('h6', null, p.title),
+            e('div', { className: 'poc-stack' },
+              ...p.stack.map((s, j) => e('span', { key: j }, s))
+            ),
+            e('p', { className: 'poc-summary' }, p.summary),
+            e('p', { className: 'poc-impact' }, 'Impact — ' + p.impact),
+            e('a', { className: 'poc-cta', href: p.href, target: '_blank', rel: 'noopener' }, p.cta, ' →')
+          )
+        )
+      ),
+      e(motion.div, {
+        className: 'poc-callout',
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: '-40px' },
+        transition: { duration: 0.6 }
+      },
+        e('em', null, 'Why this matters: '),
+        'Most AI PM applicants haven\'t shipped anything hands-on with LLMs. These POCs are how I close the gap between product judgment and technical credibility — and they\'re a preview of what I want to build full-time.'
+      )
+    )
+  );
+}
+
+function Tech() {
+  return e('section', { id: 'tech', className: 'tech' },
+    e('div', { className: 'container' },
+      e(SectionHeader, { num: '— 04', title: e(React.Fragment, null, 'Technical ', e('span', { className: 'serif italic' }, 'fluency')) }),
+      e('div', { className: 'tech-grid' },
+        ...TECH.map((t, i) =>
+          e(motion.div, {
+            key: i,
+            className: 'tech-card',
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: '-40px' },
+            transition: { duration: 0.5, delay: (i % 3) * 0.1 }
+          },
+            e('div', { className: 'icon' }, t.icon),
+            e('h5', null, t.h),
+            e('p', null, t.p),
+            e('div', { className: 'stack' },
+              ...t.stack.map((s, j) => e('span', { key: j }, s))
+            )
+          )
+        )
+      )
+    )
+  );
+}
+
+function Writing() {
+  return e('section', { id: 'writing', className: 'writing' },
+    e('div', { className: 'container' },
+      e(SectionHeader, { num: '— 05', title: e(React.Fragment, null, 'Writing ', e('span', { className: 'serif italic' }, '& POV')) }),
+      e('div', { className: 'essay-grid' },
+        ...ESSAYS.map((es, i) =>
+          e(motion.div, {
+            key: i,
+            className: 'essay',
+            initial: { opacity: 0, y: 24 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: '-40px' },
+            transition: { duration: 0.5, delay: (i % 2) * 0.1 }
+          },
+            e('div', { className: 'date' }, es.date),
+            e('h5', null, es.h),
+            e('p', null, es.p),
+            e('div', { className: 'read' }, 'Read essay →')
+          )
+        )
+      )
+    )
+  );
+}
+
+function Contact() {
+  return e('section', { id: 'contact', className: 'contact' },
+    e(motion.h2, {
+      initial: { opacity: 0, y: 30 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, margin: '-100px' },
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+    },
+      'Let\'s build', e('br'), e('span', { className: 'italic' }, 'something good.')
+    ),
+    e(motion.a, {
+      className: 'contact-cta',
+      href: 'mailto:' + PROFILE.email,
+      initial: { opacity: 0 },
+      whileInView: { opacity: 1 },
+      viewport: { once: true },
+      transition: { duration: 0.8, delay: 0.3 }
+    }, PROFILE.email),
+    e('div', { className: 'contact-links' },
+      e('a', { href: PROFILE.links.linkedin, target: '_blank', rel: 'noopener' }, 'LinkedIn'),
+      e('a', { href: PROFILE.links.github, target: '_blank', rel: 'noopener' }, 'GitHub'),
+      e('a', { href: 'tel:' + PROFILE.phone.replace(/[^0-9+]/g, '') }, PROFILE.phone),
+      e('a', { href: PROFILE.links.email }, 'Email')
+    )
+  );
+}
+
+function App() {
+  const [openIdx, setOpenIdx] = useState(null);
+  return e(React.Fragment, null,
+    e(Nav),
+    e(Hero),
+    e(Marquee),
+    e(About),
+    e(Work, { onOpen: setOpenIdx }),
+    e(Pocs),
+    e(Tech),
+    e(Writing),
+    e(Contact),
+    e('footer', null,
+      e('div', null, '© ' + new Date().getFullYear() + ' ' + PROFILE.name),
+      e('div', null, 'Built with React & Framer Motion')
+    ),
+    e(AnimatePresence, null,
+      openIdx !== null ? e(Panel, { caseStudy: CASE_STUDIES[openIdx], onClose: () => setOpenIdx(null) }) : null
+    )
+  );
+}
+
+createRoot(document.getElementById('root')).render(e(App));
+</script>
+</body>
+</html>
