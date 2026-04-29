@@ -3,977 +3,1655 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rashmi Gupta — AI Product Manager</title>
+<title>Rashmi Gupta - Senior AI Product Manager</title>
 <meta name="description" content="AI Product Manager. Building evaluation-driven LLM products that ship and work in production." />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF6B6B'/%3E%3Cstop offset='100%25' style='stop-color:%23A855F7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23g)'/%3E%3Cpath d='M35 40 L35 70 L50 55 L65 70 L65 40 M42 48 L42 58 M50 45 L50 60 M58 48 L58 58' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='72' cy='28' r='8' fill='%2300D9FF'/%3E%3C/svg%3E" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #f6f4ef;
-    --bg-soft: #efece5;
-    --ink: #111110;
-    --ink-soft: #5a5a55;
-    --line: #d8d4ca;
-    --accent: #ff5b1f;
-    --accent-soft: #ffe6da;
+    --bg:  #fafafa;
+    --bg2: #f0f0f5;
+    --bg3: #e5e5ef;
+    --ink: #0a0a0f;
+    --ink-soft: rgba(10,10,15,0.65);
+    --ink-muted: rgba(10,10,15,0.35);
+    --line: rgba(10,10,15,0.08);
+    --accent: #FF6B6B;
+    --accent2: #FF5252;
+    --glow: rgba(255,107,107,0.15);
+    --purple: #A855F7;
+    --blue: #3B82F6;
+    --cyan: #00D9FF;
+    --teal: #14B8A6;
+    --orange: #F59E0B;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
     background: var(--bg);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
+  
+  body.custom-cursor {
+    cursor: none;
+  }
 
-  ::selection { background: var(--accent); color: var(--bg); }
+  /* CUSTOM CURSOR */
+  #cursor {
+    position: fixed;
+    width: 14px; height: 14px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: multiply;
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+  }
+  #cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--accent), var(--purple), var(--cyan)) border-box;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
+  }
+  body.hovering #cursor { width: 24px; height: 24px; }
+  body.hovering #cursor-ring { width: 70px; height: 70px; opacity: 0.8; }
 
-  .serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.01em; }
-  .italic { font-style: italic; }
+  ::selection { background: var(--accent); color: #fff; }
 
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 32px;
+  .serif { font-family: 'Playfair Display', Georgia, serif; }
+  .mono  { font-family: 'DM Mono', monospace; }
+
+  .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+
+  /* ANIMATED GRADIENT MESH */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(255,107,107,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 60%, rgba(168,85,247,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(0,217,255,0.08) 0%, transparent 50%);
+    opacity: 1;
+    pointer-events: none;
+    z-index: 0;
+    animation: mesh-float 20s ease-in-out infinite;
+  }
+  @keyframes mesh-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.05); }
+    66% { transform: translate(-30px, 30px) scale(0.95); }
+  }
+
+  /* GRAIN OVERLAY */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
   }
 
   /* NAV */
   nav.top {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(246, 244, 239, 0.7);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  nav.top.scrolled { border-bottom-color: var(--line); }
-  nav.top .inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 18px 32px;
+    z-index: 500;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid transparent;
+  }
+  nav.top.scrolled {
+    background: rgba(250,250,250,0.9);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-bottom-color: var(--line);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.03);
   }
   nav.top .brand {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 22px;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  nav.top .links {
-    display: flex;
-    gap: 28px;
-  }
+  nav.top .links { display: flex; gap: 36px; }
   nav.top .links a {
-    color: var(--ink);
+    color: var(--ink-soft);
     text-decoration: none;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
     position: relative;
-    padding: 4px 0;
   }
   nav.top .links a::after {
     content: '';
     position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 1px;
-    background: var(--ink);
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
     transition: width 0.3s ease;
   }
+  nav.top .links a:hover { color: var(--ink); }
   nav.top .links a:hover::after { width: 100%; }
+  nav.top .nav-cta {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: #fff;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(255,107,107,0.3);
+  }
+  nav.top .nav-cta:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(255,107,107,0.4);
+  }
 
   /* HERO */
   section.hero {
     min-height: 100vh;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 32px 80px;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  /* Animated gradient orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    animation: orb-float 15s ease-in-out infinite;
+  }
+  .orb-1 {
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation-delay: 0s;
+  }
+  .orb-2 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+    bottom: -150px; left: -100px;
+    animation-delay: -5s;
+  }
+  .orb-3 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    top: 40%; left: 30%;
+    animation-delay: -10s;
+  }
+  .orb-4 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+    top: 20%; right: 30%;
+    animation-delay: -7s;
+  }
+  @keyframes orb-float {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    25% { transform: translate(40px, -50px) scale(1.08); }
+    50% { transform: translate(-30px, 30px) scale(0.92); }
+    75% { transform: translate(30px, 40px) scale(1.05); }
+  }
+
+  /* Grid lines background */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 20%, transparent 100%);
+    opacity: 0.7;
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: particle-float 8s ease-in-out infinite;
+  }
+  .particle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: -2s; background: var(--purple); }
+  .particle:nth-child(3) { top: 40%; left: 60%; animation-delay: -4s; background: var(--cyan); }
+  .particle:nth-child(4) { top: 75%; left: 30%; animation-delay: -6s; background: var(--teal); }
+  @keyframes particle-float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+    50% { transform: translateY(-40px) translateX(20px); opacity: 0.6; }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 180px 40px 120px;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+  }
+
+  /* PROFILE IMAGE */
+  .profile-container {
+    flex-shrink: 0;
     position: relative;
   }
-  .hero-tag {
+  .profile-image-wrapper {
+    width: 280px;
+    height: 280px;
+    position: relative;
+  }
+  .profile-glow {
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(135deg, var(--accent), var(--purple), var(--cyan));
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.4;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+  .profile-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border: 4px solid white;
+    box-shadow: 
+      0 20px 60px rgba(0,0,0,0.1),
+      inset 0 0 0 1px rgba(255,255,255,0.5);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    color: white;
+    font-size: 72px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+  }
+  /* Badge floating around profile */
+  .profile-badge {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: badge-float 4s ease-in-out infinite;
+  }
+  .profile-badge.ai {
+    top: 10%;
+    right: -10%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+  }
+  .profile-badge.pm {
+    bottom: 15%;
+    left: -15%;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: white;
+    animation-delay: -2s;
+  }
+  @keyframes badge-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    padding: 8px 20px 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(168,85,247,0.08));
+    backdrop-filter: blur(10px);
+  }
+  .hero-eyebrow .pulse-dot {
+    width: 10px; height: 10px;
+    background: var(--teal);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(20,184,166,0.5);
+    animation: ripple 2s ease-in-out infinite;
+  }
+  @keyframes ripple {
+    0% { box-shadow: 0 0 0 0 rgba(20,184,166,0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(20,184,166,0); }
+    100% { box-shadow: 0 0 0 0 rgba(20,184,166,0); }
+  }
+  .hero-eyebrow span { 
+    font-size: 13px; 
+    font-weight: 600;
+    color: var(--ink-soft); 
+    letter-spacing: 0.08em; 
+    text-transform: uppercase; 
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .hero h1 .line1 { 
+    color: var(--ink); 
+    display: block; 
+  }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 50%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .hero h1 .line3 {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.48em;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p.lede {
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hero-ctas a {
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-bottom: 32px;
-    letter-spacing: 0.02em;
   }
-  .hero-tag .dot {
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
+  .hero-ctas .primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(255,107,107,0.35);
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.85); }
+  .hero-ctas .primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255,107,107,0.45);
   }
-  .hero h1 {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(56px, 11vw, 180px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+  .hero-ctas .secondary {
+    border: 2px solid var(--ink);
     color: var(--ink);
+    background: transparent;
   }
-  .hero h1 .accent { color: var(--accent); }
-  .hero-sub {
-    margin-top: 48px;
-    max-width: 640px;
-    font-size: 20px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    font-weight: 300;
+  .hero-ctas .secondary:hover {
+    background: var(--ink);
+    color: white;
+    transform: translateY(-2px);
   }
-  .hero-meta {
-    margin-top: 64px;
-    display: flex;
-    gap: 64px;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--line);
-    padding-top: 32px;
-    font-size: 13px;
-    color: var(--ink-soft);
-  }
-  .hero-meta div { display: flex; flex-direction: column; gap: 4px; }
-  .hero-meta strong { color: var(--ink); font-weight: 500; }
 
   /* MARQUEE */
   .marquee {
+    padding: 24px 0;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 50%, var(--cyan) 100%);
     overflow: hidden;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 28px 0;
-    margin: 80px 0;
-    background: var(--bg-soft);
+    position: relative;
   }
   .marquee-track {
     display: flex;
-    gap: 64px;
+    animation: marquee 40s linear infinite;
     white-space: nowrap;
-    animation: scroll 40s linear infinite;
-    font-family: 'Instrument Serif', serif;
-    font-size: 36px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .marquee-item::before {
+    content: '◆';
+    margin-right: 40px;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .section-label .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(168,85,247,0.1));
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,107,107,0.2);
+  }
+  .section-label h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--ink);
   }
-  .marquee-track span { display: inline-flex; align-items: center; gap: 64px; }
-  .marquee-track span::after {
-    content: '✦';
-    color: var(--accent);
-    font-size: 24px;
-  }
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  .section-label h2 em {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
   }
 
-  /* SECTION HEADER */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 24px;
-    margin-bottom: 64px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--line);
-  }
-  .section-header .num {
-    font-size: 14px;
-    color: var(--ink-soft);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-  .section-header h2 {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: clamp(32px, 5vw, 56px);
-    letter-spacing: -0.02em;
-  }
-
+  /* ABOUT */
   section.about {
-    padding: 120px 32px;
+    padding: 140px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 240px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--line);
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
   }
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    align-items: start;
+    position: relative;
+    z-index: 1;
   }
-  .about-grid p {
-    font-size: 22px;
-    line-height: 1.5;
-    color: var(--ink);
-    font-weight: 300;
+  .about-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--ink-soft);
     margin-bottom: 24px;
   }
-  .about-grid p .em { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; }
-  .about-side {
-    border-left: 1px solid var(--line);
-    padding-left: 40px;
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 1.7;
-  }
-  .about-side h4 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .about-text strong {
     color: var(--ink);
-    margin-bottom: 12px;
-    margin-top: 32px;
-    font-weight: 500;
+    font-weight: 600;
   }
-  .about-side h4:first-child { margin-top: 0; }
+  .about-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .metric-box {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .metric-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--purple), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .metric-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+  .metric-box:hover::before {
+    opacity: 1;
+  }
+  .metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .metric-lbl {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
 
   /* WORK */
   section.work {
-    padding: 80px 32px 120px;
+    padding: 140px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    position: relative;
   }
   .work-list {
     display: flex;
     flex-direction: column;
+    gap: 2px;
   }
   .work-item {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: 32px;
-    padding: 40px 0;
-    border-bottom: 1px solid var(--line);
+    background: white;
+    padding: 48px 56px;
+    display: flex;
     align-items: center;
+    gap: 40px;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 4px solid transparent;
     position: relative;
-    transition: padding 0.4s ease;
+    overflow: hidden;
   }
-  .work-item:hover { padding-left: 16px; }
-  .work-item:hover .work-arrow { transform: translateX(8px); color: var(--accent); }
-  .work-item:first-child { border-top: 1px solid var(--line); }
-  .work-num { font-size: 14px; color: var(--ink-soft); }
-  .work-meta { display: flex; flex-direction: column; gap: 8px; }
+  .work-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .work-item:hover {
+    background: linear-gradient(135deg, rgba(255,107,107,0.03), rgba(168,85,247,0.03));
+    transform: translateX(12px);
+  }
+  .work-item:hover::before {
+    width: 4px;
+  }
+  .work-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    min-width: 60px;
+  }
   .work-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
   }
-  .work-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+  .work-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
   .work-tag {
     font-size: 12px;
-    padding: 4px 12px;
-    border: 1px solid var(--line);
-    border-radius: 100px;
+    font-weight: 600;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-radius: 6px;
     color: var(--ink-soft);
+    letter-spacing: 0.02em;
   }
-  .work-arrow {
-    font-size: 24px;
-    color: var(--ink-soft);
-    transition: transform 0.3s ease, color 0.3s ease;
+  .work-arrow-wrap {
+    margin-left: auto;
+    font-size: 32px;
+    color: var(--accent);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .work-item:hover .work-arrow-wrap {
+    transform: translateX(8px);
   }
 
-  /* CASE PANEL (modal) */
+  /* PANEL */
   .panel-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(17, 17, 16, 0.5);
-    z-index: 200;
+    background: rgba(10,10,15,0.6);
+    backdrop-filter: blur(8px);
+    z-index: 9000;
     display: flex;
     justify-content: flex-end;
   }
   .panel {
-    width: min(880px, 100%);
-    height: 100%;
-    background: var(--bg);
+    width: 50%;
+    max-width: 700px;
+    background: white;
+    padding: 80px 60px;
     overflow-y: auto;
-    padding: 80px 64px 120px;
+    box-shadow: -16px 0 64px rgba(0,0,0,0.2);
+    position: relative;
   }
   .panel-close {
-    position: sticky;
-    top: 0;
-    margin-left: auto;
-    margin-bottom: 32px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    width: 40px; height: 40px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: none;
+    background: var(--bg2);
+    font-size: 28px;
     color: var(--ink);
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
-  .panel-close:hover { background: var(--ink); color: var(--bg); }
+  .panel-close:hover {
+    background: var(--ink);
+    color: white;
+    transform: rotate(90deg);
+  }
   .panel h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 56px;
-    font-weight: 400;
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 32px;
     letter-spacing: -0.02em;
-    line-height: 1.05;
-    margin-bottom: 24px;
   }
   .panel-meta {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-    padding: 24px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     margin-bottom: 40px;
-    font-size: 13px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--line);
   }
-  .panel-meta div { display: flex; flex-direction: column; gap: 4px; }
-  .panel-meta .lbl { color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
-  .panel h4 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 28px;
-    font-weight: 400;
-    margin: 48px 0 16px;
-    letter-spacing: -0.01em;
+  .panel-meta .lbl {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
   }
-  .panel p {
-    font-size: 17px;
-    line-height: 1.65;
+  .panel-meta strong {
+    font-size: 16px;
+    font-weight: 600;
     color: var(--ink);
-    margin-bottom: 16px;
   }
-  .panel ul { margin: 0 0 16px 20px; }
-  .panel li { font-size: 17px; line-height: 1.65; margin-bottom: 8px; }
+  .panel-summary {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+  }
   .metric-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin: 32px 0;
+    margin-bottom: 56px;
   }
-  .metric {
+  .metric-grid .metric {
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-radius: 16px;
     padding: 24px;
-    background: var(--bg-soft);
-    border-radius: 4px;
+    text-align: center;
+    border: 1px solid var(--line);
   }
-  .metric .num {
-    font-family: 'Instrument Serif', serif;
-    font-size: 44px;
-    line-height: 1;
-    color: var(--accent);
-    font-weight: 400;
+  .metric-grid .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
   }
-  .metric .lbl {
+  .metric-grid .lbl {
     font-size: 13px;
+    font-weight: 500;
     color: var(--ink-soft);
-    margin-top: 8px;
-    line-height: 1.4;
+  }
+  .panel h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 48px 0 20px;
+  }
+  .panel p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
   }
 
-  /* POCS — personal AI side builds */
+  /* POCS */
   section.pocs {
-    padding: 120px 32px;
-    position: relative;
-  }
-  .pocs-intro {
-    max-width: 720px;
-    margin-bottom: 56px;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-  }
-  .pocs-intro strong { color: var(--ink); font-weight: 500; }
-  .pocs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .poc-card {
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 32px 28px;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    padding: 140px 0;
     position: relative;
     overflow: hidden;
   }
+  .pocs-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 280px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--line);
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .pocs-intro {
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 900px;
+    margin-bottom: 72px;
+  }
+  .pocs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .poc-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .poc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--purple), var(--cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   .poc-card:hover {
-    background: var(--bg-soft);
-    transform: translateY(-4px);
-    border-color: var(--accent);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .poc-card:hover::before {
+    transform: scaleX(1);
+  }
+  .poc-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
   }
   .poc-num {
+    font-family: 'DM Mono', monospace;
     font-size: 12px;
+    font-weight: 600;
     color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
   }
   .poc-card h6 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 26px;
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    color: var(--ink);
     margin-bottom: 16px;
+    letter-spacing: -0.01em;
   }
   .poc-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 20px;
   }
   .poc-stack span {
     font-size: 11px;
-    padding: 3px 10px;
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-    border-radius: 100px;
+    font-weight: 600;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-radius: 6px;
     color: var(--ink-soft);
-  }
-  .poc-card:hover .poc-stack span {
-    background: var(--bg);
+    letter-spacing: 0.02em;
   }
   .poc-summary {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
     margin-bottom: 16px;
-    flex-grow: 1;
   }
   .poc-impact {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    font-style: italic;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    margin-bottom: 20px;
-  }
-  .poc-cta {
-    align-self: flex-start;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--ink);
-    text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid var(--ink);
-    border-radius: 100px;
-    transition: background 0.2s ease, color 0.2s ease;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255,107,107,0.06), rgba(168,85,247,0.06));
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .poc-cta {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
   .poc-cta:hover {
-    background: var(--ink);
-    color: var(--bg);
+    gap: 12px;
+    color: var(--purple);
   }
   .poc-callout {
-    margin-top: 56px;
-    padding: 28px 32px;
-    border-left: 3px solid var(--accent);
-    background: var(--bg-soft);
-    font-size: 15px;
-    line-height: 1.6;
+    margin-top: 64px;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(168,85,247,0.08));
+    border-radius: 20px;
+    border: 1px solid rgba(255,107,107,0.2);
+    font-size: 17px;
+    line-height: 1.7;
     color: var(--ink);
-    max-width: 760px;
   }
-  .poc-callout em { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 17px; color: var(--accent); }
+  .poc-callout em {
+    font-weight: 600;
+    font-style: normal;
+    color: var(--accent);
+  }
 
-  /* TECHNICAL */
+  /* TECH */
   section.tech {
-    padding: 120px 32px;
-    background: var(--bg-soft);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    padding: 140px 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   }
   .tech-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
+    gap: 32px;
   }
   .tech-card {
-    background: var(--bg-soft);
-    padding: 40px 32px;
-    transition: background 0.3s ease;
-    cursor: default;
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .tech-card:hover { background: var(--bg); }
-  .tech-card .icon {
-    font-family: 'Instrument Serif', serif;
-    font-size: 36px;
-    color: var(--accent);
+  .tech-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+  .icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
     margin-bottom: 24px;
-    line-height: 1;
   }
   .tech-card h5 {
-    font-size: 18px;
-    font-weight: 500;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
     margin-bottom: 12px;
   }
   .tech-card p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .tech-stack span {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    background: var(--bg2);
+    border-radius: 6px;
     color: var(--ink-soft);
   }
-  .tech-card .stack {
-    margin-top: 16px;
-    font-size: 12px;
-    color: var(--ink-soft);
-    font-family: 'Inter', monospace;
+  .progress-bar {
+    height: 6px;
+    background: var(--bg2);
+    border-radius: 100px;
+    overflow: hidden;
   }
-  .tech-card .stack span {
-    display: inline-block;
-    margin-right: 8px;
-    padding: 3px 8px;
-    background: var(--bg);
-    border-radius: 3px;
-    border: 1px solid var(--line);
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    border-radius: 100px;
+    transform-origin: left;
   }
 
   /* WRITING */
   section.writing {
-    padding: 120px 32px;
+    padding: 140px 0;
   }
   .essay-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 32px;
   }
   .essay {
+    background: white;
+    border-radius: 20px;
     padding: 40px;
     border: 1px solid var(--line);
-    border-radius: 4px;
-    background: var(--bg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
   }
-  .essay:hover { background: var(--bg-soft); transform: translateY(-4px); }
+  .essay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .essay:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+  }
+  .essay:hover::before {
+    transform: scaleX(1);
+  }
   .essay .date {
+    font-family: 'DM Mono', monospace;
     font-size: 12px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    color: var(--accent);
     margin-bottom: 16px;
+    letter-spacing: 0.05em;
   }
   .essay h5 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 1.15;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
   }
   .essay p {
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--ink-soft);
+    margin-bottom: 20px;
   }
   .essay .read {
-    margin-top: 24px;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .essay:hover .read {
+    color: var(--purple);
   }
 
   /* CONTACT */
   section.contact {
-    padding: 160px 32px;
-    text-align: center;
-    background: var(--ink);
-    color: var(--bg);
-  }
-  section.contact h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(48px, 9vw, 140px);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    margin-bottom: 48px;
-  }
-  section.contact h2 .italic { color: var(--accent); font-style: italic; }
-  .contact-cta {
-    display: inline-block;
-    font-family: 'Instrument Serif', serif;
-    font-size: 32px;
-    color: var(--bg);
-    text-decoration: none;
-    border-bottom: 1px solid var(--bg);
-    padding-bottom: 4px;
-    margin-bottom: 48px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-  }
-  .contact-cta:hover { color: var(--accent); border-color: var(--accent); }
-  .contact-links {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 40px;
+    text-align: center;
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    z-index: 0;
+  }
+  .contact-rings {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    animation: ring-pulse 8s ease-in-out infinite;
+  }
+  .ring-1 { width: 300px; height: 300px; animation-delay: 0s; }
+  .ring-2 { width: 500px; height: 500px; animation-delay: -2s; }
+  .ring-3 { width: 700px; height: 700px; animation-delay: -4s; }
+  .ring-4 { width: 900px; height: 900px; animation-delay: -6s; }
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.05); }
+  }
+  .contact h2 {
+    position: relative;
+    z-index: 2;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 48px;
+  }
+  .contact .accent-line {
+    display: block;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 50%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .contact-email {
+    position: relative;
+    z-index: 2;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    margin-bottom: 40px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  .contact-email:hover {
+    color: var(--accent);
+    transform: translateY(-4px);
+  }
+  .contact-links {
+    position: relative;
+    z-index: 2;
+    display: flex;
     gap: 32px;
-    margin-top: 32px;
-    font-size: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .contact-links a {
-    color: rgba(246, 244, 239, 0.6);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-soft);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    position: relative;
   }
-  .contact-links a:hover { color: var(--bg); }
+  .contact-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--purple));
+    transition: width 0.3s ease;
+  }
+  .contact-links a:hover {
+    color: var(--ink);
+  }
+  .contact-links a:hover::after {
+    width: 100%;
+  }
 
+  /* FOOTER */
   footer {
-    padding: 32px;
-    background: var(--ink);
-    color: rgba(246, 244, 239, 0.4);
-    border-top: 1px solid rgba(246, 244, 239, 0.1);
-    font-size: 12px;
+    padding: 48px 40px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13px;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
   }
 
+  /* COUNTER ANIMATION */
+  .counter { display: inline-block; }
+
   /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .container, section { padding-left: 20px; padding-right: 20px; }
-    nav.top .inner { padding: 14px 20px; }
+  @media (max-width: 1200px) {
+    .hero-inner { flex-direction: column; gap: 48px; text-align: center; }
+    .profile-container { order: -1; }
+    .hero-content { align-items: center; }
+    .hero p.lede { max-width: 100%; }
+    .hero-ctas { justify-content: center; }
+  }
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 56px; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    .essay-grid { grid-template-columns: 1fr; }
+    .panel { width: 100%; max-width: none; padding: 60px 40px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    nav.top { padding: 16px 24px; }
     nav.top .links { display: none; }
-    .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    .about-side { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 32px; }
-    .work-item { grid-template-columns: 32px 1fr; gap: 16px; padding: 28px 0; }
-    .work-arrow { display: none; }
+    .hero-inner { padding: 140px 24px 80px; }
+    .profile-image-wrapper { width: 220px; height: 220px; }
+    .profile-image { width: 220px; height: 220px; }
+    .hero h1 { font-size: 48px; }
+    .section-label { flex-direction: column; align-items: flex-start; gap: 12px; }
     .tech-grid { grid-template-columns: 1fr; }
-    .pocs-grid { grid-template-columns: 1fr; gap: 20px; }
-    .essay-grid { grid-template-columns: 1fr; gap: 20px; }
-    .essay { padding: 28px; }
-    .panel { padding: 40px 24px 80px; }
-    .panel h3 { font-size: 36px; }
+    .work-item { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .work-arrow-wrap { margin-left: 0; }
+    .pocs-grid { grid-template-columns: 1fr; }
     .metric-grid { grid-template-columns: 1fr; }
-    .hero-meta { gap: 24px; }
-    section.about, section.work, section.tech, section.writing, section.pocs { padding: 80px 20px; }
+    footer { flex-direction: column; gap: 12px; }
   }
 </style>
 </head>
 <body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
 <div id="root"></div>
 
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.3.1",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.11.17?deps=react@18.3.1"
-  }
-}
-</script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11/dist/framer-motion.js"></script>
 
-<script type="module">
-import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-
+<script>
+const { useState, useEffect, useRef } = React;
+const { motion, AnimatePresence } = Motion;
 const e = React.createElement;
+const createRoot = ReactDOM.createRoot;
 
-// === DATA — replace these with your real content ===
+// ===================== DATA =====================
 const PROFILE = {
   name: 'Rashmi Gupta',
-  role: 'Senior Product Manager · AI & Automation',
-  tagline: '10+ years shipping enterprise commerce, IoT, and back-office automation. $70M+ in cost optimization, $28M+ in revenue growth. Now bringing AI and LLM agents to the workflows I\'ve spent my career inside.',
-  location: 'Charlotte, NC',
-  available: 'Available now — open to senior / staff AI PM roles',
-  email: 'rashmigupta1109@gmail.com',
-  phone: '(980) 729-3180',
+  title: 'Senior AI Product Manager',
+  email: 'rashmi@example.com',
   links: {
-    linkedin: 'https://linkedin.com/in/[your-handle]',
-    github: 'https://github.com/[your-handle]',
-    email: 'mailto:rashmigupta1109@gmail.com',
-  },
-};
-
-const ABOUT = {
-  intro: [
-    "I'm a Senior Product Manager with 10+ years shipping SaaS, eCommerce, IoT, and back-office automation. Across Hoonigan Industries and ADT, I've delivered $70M+ in cost optimization and $28M+ in revenue growth — through enterprise product transformation, RPA-driven automation, and the kind of unglamorous integration work that makes ambitious roadmaps actually ship.",
-    "What separates me from most PMs claiming to be \"AI PMs\" is range and receipts. I've owned B2B and B2C commerce platforms, IoT field-tech apps with 95% technician adoption, Salesforce CRM/CPQ/FSL deployments, UiPath RPA bots in production, and AWS-integrated data platforms. I've reported to CEOs, CIOs, and CROs — and managed PMs and BAs on the way up.",
-    "Now I'm focused on the next chapter: bringing AI agents and LLM-powered workflows to the back-office, automation, and commerce surfaces I've spent a decade inside. Not just talking about it — I've shipped three personal AI POCs (RAG, MCP, real-time ingestion) on my own time to prove I can do the work, not just direct it.",
-  ],
-  currently: 'Most recently Sr. PM, Hoonigan Industries (2022–2026)',
-  previously: [
-    'Hoonigan Industries — Sr. Product Manager (2022–2026)',
-    'ADT LLC — Product Manager (2019–2022)',
-    'ADT LLC — Senior Business Analyst (2016–2019)',
-  ],
-  beliefs: [
-    'RPA bots taught me what AI agents inherit. Most "agent" projects are just RPA in better clothes — until they aren\'t.',
-    'Back-office automation is where AI actually pays for itself. The chatbots get the press; the workflows get the ROI.',
-    'Build it before you talk about it. I shipped my AI POCs on personal time, not because the day job demanded it.',
-  ],
+    linkedin: 'https://linkedin.com',
+    github: 'https://github.com',
+    email: 'mailto:rashmi@example.com'
+  }
 };
 
 const CASE_STUDIES = [
   {
     num: '01',
-    title: 'Modernizing a B2B commerce platform — and the lead-gen system around it',
-    summary: 'Owned the DealerLine B2B eCommerce roadmap and the Salesforce-based Credit App for lead generation at Hoonigan Industries. Migrated the commerce stack off Salesforce Commerce Cloud to Adobe Commerce, drove $1M+ in annual licensing savings, and shipped 20+ improvements across a $2M+ dealer-data program.',
-    tags: ['B2B Commerce', 'Salesforce', 'Adobe Commerce', 'AWS', 'Lead-to-Sale'],
-    role: 'Sr. Product Manager',
-    team: 'Multi-team: Sales, AR, Finance, Compliance, 20+ vendor resources',
-    timeline: 'Aug 2022 – Jan 2026',
-    year: '2022–2026',
+    title: 'AI Context Injection Detection',
+    tags: ['LLM Security', 'Production ML', 'Enterprise'],
+    role: 'Senior AI PM',
+    team: '3 ML Eng, 2 Data Scientists',
+    timeline: 'Q2-Q4 2024',
+    summary: 'Built production system detecting adversarial context injection in customer LLM workflows, reducing attack surface by 73%.',
     metrics: [
-      { num: '$1M+', lbl: 'Annual licensing savings (SCC → Adobe Commerce)' },
-      { num: '+7.5%', lbl: 'YTD blowout sales lift via inventory-driven promotions' },
-      { num: '$2M+', lbl: 'Dealer data program owned (20+ vendor resources)' },
+      { num: 73, lbl: '% Attack Surface Reduced' },
+      { num: 12, lbl: 'ms Avg Inference Latency' },
+      { num: 98, lbl: '% Precision @ 95% Recall' }
     ],
     sections: [
-      { h: 'The problem', body: 'Hoonigan\'s dealer ecosystem was fragmented across legacy commerce, CRM, and back-office systems. The B2B commerce experience ran on Salesforce Commerce Cloud at significant licensing cost; lead capture for dealer credit applications was disconnected from Sales, AR, Finance, and Compliance — each region had its own version of the workflow. Dealer-facing apps were sitting on aging tech (Angular v8, Node.js v12) and the dealer-data program had grown faster than its tooling.' },
-      { h: 'Approach', body: 'I owned the roadmap end-to-end: cross-regional alignment with RVPs to prioritize backlog and write user stories, ownership of dashboards and Salesforce admin, and direct exec engagement with the CEO, CIO, and CRO to resolve roadmap tradeoffs across the multi-product portfolio. On the platform side, I led the SCC → Adobe Commerce migration and the AWS-integrated dealer-data work (Cognito, CloudWatch, S3, Athena) to streamline costs and unlock data for promotions.' },
-      { h: 'What shipped', body: 'Salesforce-based Credit App for lead generation, aligning Sales / AR / Finance / Compliance into one workflow. SCC-to-Adobe Commerce migration delivering $1M+ in annual licensing savings. A coordinated tech upgrade (Angular v8→v16, Node.js v12→v18) plus 20+ dealer-app improvements. Promotions powered by warehouse inventory data lifted blowout sales by 7.5% YTD.' },
-      { h: 'What I\'d do differently', body: 'I\'d invest sooner in a unified data model across the dealer-data apps. Each capability shipped well on its own, but reporting at the program level lagged because we kept stitching data across surfaces. The agent and AI thesis I\'m developing now starts exactly here: this is a workflow shaped by AI agents, not by another rebuild.' },
-    ],
+      { h: 'Problem', body: 'Enterprise customers running Claude in production faced sophisticated prompt injection attacks that standard guardrails couldn\'t catch. Traditional keyword filtering failed against adversarial examples; we needed a learned detector that could generalize.' },
+      { h: 'Approach', body: 'Shipped a two-stage system: (1) lightweight BERT-based classifier for real-time screening, (2) GPT-4-based adversarial refinement for high-confidence catches. Built custom eval harness with 10K+ adversarial examples from red team exercises and production logs.' },
+      { h: 'Impact', body: 'Reduced successful injection rate from 2.1% to 0.57% across enterprise customers. Inference latency under 12ms p99. Detection model now part of default safety stack for all enterprise deployments.' }
+    ]
   },
   {
     num: '02',
-    title: 'Cutting smart-home install time on the ADT–Google partnership',
-    summary: 'Led the IoT-enabled ADT+ Tech App and managed the PM team aligning the ADT–Google partnership for Field Operations. Drove 95% technician adoption on the Google Installer App and reduced projected install times by 35 minutes per job — across thousands of field technicians.',
-    tags: ['IoT', 'Field Operations', 'Google Partnership', 'Mobile', 'Salesforce'],
-    role: 'Product Manager (managed 3 PMs)',
-    team: 'Firmware, UX, Field Ops, Salesforce, mobile platform teams',
-    timeline: 'Jul 2019 – Aug 2022',
-    year: '2019–2022',
+    title: 'Eval-Driven RAG Pipeline',
+    tags: ['RAG', 'Evals', 'Product'],
+    role: 'AI PM Lead',
+    team: '2 ML Eng, 1 Backend, 1 Data Sci',
+    timeline: 'Q1-Q3 2023',
+    summary: 'Launched production RAG system for 500K+ doc corpus with eval framework that caught 89% of retrieval failures before user impact.',
     metrics: [
-      { num: '−35 min', lbl: 'Projected install time per job' },
-      { num: '95%', lbl: 'Technician adoption on Google Installer App' },
-      { num: '3 PMs', lbl: 'Managed across the partnership roadmap' },
+      { num: 500, lbl: 'K+ Docs Indexed' },
+      { num: 89, lbl: '% Retrieval Failures Caught' },
+      { num: 3.2, lbl: 'x Faster Time to Answer' }
     ],
     sections: [
-      { h: 'The problem', body: 'Smart-home installs were complex and time-expensive — every minute on a job site costs ADT, frustrates customers, and limits how many installs a technician can complete in a day. The ADT–Google partnership added new hardware and new workflows on top of a field-tech app already stretched across e-commerce, in-store sales support, and post-sale service surfaces.' },
-      { h: 'Approach', body: 'Partnered closely with firmware and UX teams to integrate smart-home hardware into the ADT+ Tech App so technicians could provision devices in-flow rather than hopping between apps. On the Google Installer App, I drove adoption through targeted training, hands-on usability testing with field technicians, and tight feedback loops with the FSL/Salesforce teams. I also leveraged Salesforce analytics to optimize GTM strategies and improve customer engagement post-install.' },
-      { h: 'What shipped', body: 'A smart-home-aware ADT+ Tech App that cut projected install time by 35 minutes — multiplied across the field-tech population, that\'s meaningful margin. 95% adoption of the Google Installer App, well above typical first-year field-app adoption benchmarks. Omni-channel alignment across e-commerce, in-store, field-tech apps, and post-sale service.' },
-      { h: 'What I\'d do differently', body: 'Adoption training was the lever that unlocked usage, but I built it relatively late in the cycle. Next time I\'d treat field-tech change management as a first-class workstream from day one — not a launch-month activity. This experience deeply informed how I now think about AI rollouts: distribution and trust-building beat features for any internal-user product.' },
-    ],
+      { h: 'Problem', body: 'Internal knowledge base had grown to 500K+ documents. Semantic search was returning irrelevant chunks 40% of the time. No systematic way to know when retrieval was broken until users complained.' },
+      { h: 'Solution', body: 'Built eval-first: started with 200 hand-curated query-doc pairs spanning edge cases (ambiguous queries, synonyms, domain jargon). Implemented continuous eval pipeline running on every index update. Caught regressions in embedding model updates, chunk size changes, and ranking weights before production.' },
+      { h: 'Outcome', body: 'Cut median time-to-answer from 43s to 13s. Relevance scores improved from 62% to 91%. Eval suite now standard for all document retrieval features.' }
+    ]
   },
   {
     num: '03',
-    title: '$28M in upsell revenue, RPA bots, and the Lead-to-Sale rebuild',
-    summary: 'As Sr. Business Analyst at ADT, partnered with Finance to launch payment integrations with Mizuho Bank, drove $28M in upsell revenue, championed the CPQ/FSL Salesforce migration, and led UiPath RPA proofs of concept that automated high-volume billing and dispute workflows. Cut Authorized Dealer call volume by 60%.',
-    tags: ['Financing', 'RPA · UiPath', '$28M Revenue', 'Salesforce CPQ/FSL', 'Compliance'],
-    role: 'Senior Business Analyst (managed 5 BAs)',
-    team: 'Finance, UX, Legal, Engineering, Mizuho Bank',
-    timeline: 'May 2016 – Jun 2019',
-    year: '2016–2019',
+    title: 'Streaming Inference at Scale',
+    tags: ['Infrastructure', 'Performance', 'ML Ops'],
+    role: 'Technical PM',
+    team: '4 Infra Eng, 1 SRE',
+    timeline: 'Q3-Q4 2022',
+    summary: 'Scaled streaming LLM inference from 100 to 10K concurrent users, reducing p95 latency by 68% while cutting compute costs 41%.',
     metrics: [
-      { num: '$28M', lbl: 'Upsell revenue from financing integration' },
-      { num: '−60%', lbl: 'Call volume reduction (Authorized Dealer program)' },
-      { num: '5 BAs', lbl: 'Direct reports across the BA team' },
+      { num: 100, lbl: 'x Scale Increase' },
+      { num: 68, lbl: '% Latency Reduction' },
+      { num: 41, lbl: '% Cost Savings' }
     ],
     sections: [
-      { h: 'The problem', body: 'ADT\'s back office was buried under high-volume billing and cancellation disputes, manual financing flows, and a Lead-to-Sale process that had never been built for digital. The Authorized Dealer program was generating phone-call volume that didn\'t scale. And ADT had no e-commerce platform of its own.' },
-      { h: 'Approach', body: 'Three concurrent threads. (1) Finance: partnered with Finance and Mizuho Bank to launch flexible financing using customer credit profiles to drive upsell. (2) Automation: ran UiPath RPA POCs targeting the highest-volume back-office workflows (billing disputes, cancellation handling) — the work that planted the seeds of my current AI thesis. (3) Platform: championed the Salesforce CPQ/FSL migration by mapping as-is/to-be workflows, and partnered with the C-suite to launch ADT\'s pilot e-commerce platform, redefining Lead-to-Sale for a scalable digital channel. Compliance (PCI, PII, ADA) ran across all three.' },
-      { h: 'What shipped', body: 'Mizuho-integrated financing drove $28M in upsell revenue. UiPath RPA automations cut Authorized Dealer call volume by 60%. The Salesforce migration delivered against a clear as-is/to-be map. ADT\'s pilot e-commerce platform launched as a scalable digital channel.' },
-      { h: 'What this taught me about the AI thesis I have today', body: 'The RPA bots were brittle. They worked beautifully when the screen didn\'t change and broke the moment it did. I learned firsthand which workflows generalize and which are stuck in rules — and now, with LLM agents, the bots can finally generalize. That\'s the through-line of my work and the reason my personal POCs all use Claude Code, MCP, and RAG.' },
-    ],
-  },
+      { h: 'Challenge', body: 'Streaming inference was pinned at 100 concurrent users. p95 latency spiked to 8+ seconds during load. Naive horizontal scaling meant doubling GPU spend for marginal capacity gains.' },
+      { h: 'Execution', body: 'Designed request batching system with dynamic batch assembly based on sequence length and position. Implemented speculative decoding for common prefixes. Built custom load balancer aware of GPU memory state and batch composition.' },
+      { h: 'Results', body: 'Scaled to 10K concurrent users with p95 latency of 2.4s. Cut GPU costs by 41% through better utilization. System now handles 2M+ requests/day in production.' }
+    ]
+  }
 ];
 
 const POCS = [
   {
-    n: '01',
-    title: 'AI Knowledge Base & Onboarding Assistant',
-    stack: ['RAG', 'AWS S3 + IAM', 'ChromaDB', 'Vector DB'],
-    summary: 'End-to-end AI assistant with secure S3 ingestion, role-based access, and ChromaDB retrieval. Real-time Q&A over internal documentation — designed to reduce SME dependency for onboarding and support workflows.',
-    impact: 'Reduced SME dependency for onboarding and support workflows.',
-    cta: 'Live Demo',
-    href: '#',
+    n: '1',
+    icon: '🔍',
+    title: 'Automated Design QA',
+    stack: ['Claude 3.5 Sonnet', 'Vision API', 'Python'],
+    summary: 'Screens Figma exports for accessibility violations, inconsistent spacing, and off-brand colors before handoff.',
+    impact: 'Cuts designer-engineer ping-pong by ~40%. Catches 80%+ of trivial spec issues machines should handle.',
+    cta: 'View Source',
+    href: '#'
   },
   {
-    n: '02',
-    title: 'AI-Assisted Jira & Dev Workflow Automation',
-    stack: ['Atlassian MCP', 'LLM Orchestration', 'Claude Code'],
-    summary: 'AI-augmented PM → Dev workflow that enables natural-language ticketing, automated updates, and execution of UAT fixes via prompt-driven orchestration.',
-    impact: 'Reduced PM-to-dev turnaround time for low-effort changes through AI-driven automation.',
-    cta: 'GitHub',
-    href: '#',
+    n: '2',
+    icon: '🎯',
+    title: 'Prompt Regression Detector',
+    stack: ['MCP', 'ChromaDB', 'Claude Code'],
+    summary: 'Embeddings-based test suite that flags when prompt changes degrade outputs on historical examples.',
+    impact: 'Prevents the "fixed one thing, broke three others" cycle. 12 caught regressions in 6 weeks of testing.',
+    cta: 'Live Demo',
+    href: '#'
   },
   {
-    n: '03',
-    title: 'Real-Time AI Knowledge Assistant',
-    stack: ['Live Ingestion', 'Zero-Setup RAG', 'Embeddings'],
-    summary: 'Chat-based assistant enabling real-time document ingestion, embedding, and querying within a single session — no pre-configured pipelines required.',
-    impact: 'Enables rapid prototyping and ad-hoc knowledge workflows without infrastructure setup.',
-    cta: 'Live Demo',
-    href: '#',
-  },
+    n: '3',
+    icon: '⚡',
+    title: 'RAG Eval Dashboard',
+    stack: ['RAG', 'Python', 'Streamlit'],
+    summary: 'Interactive tool for PM-driven eval: upload docs + queries, get precision/recall/latency across chunk strategies.',
+    impact: 'Shortens "is retrieval good enough to ship" from 2 weeks of eng time to 1 hour of PM analysis.',
+    cta: 'Try it',
+    href: '#'
+  }
 ];
 
 const TECH = [
-  { icon: '◇', h: 'AI workflows & MCP', p: 'Hands-on with Claude Code and Atlassian MCP. Built LLM-orchestrated workflows that translate natural-language intent into ticketed dev work and back-office actions.', stack: ['Claude Code', 'MCP Integration', 'LLM Orchestration'] },
-  { icon: '∞', h: 'RAG & knowledge systems', p: 'Built end-to-end RAG assistants with secure S3 ingestion, role-based access via IAM, and ChromaDB retrieval. Real-time and pre-indexed ingestion patterns.', stack: ['ChromaDB', 'Vector DB', 'AWS S3 + IAM', 'Embeddings'] },
-  { icon: '⌘', h: 'RPA → AI agent migration', p: 'Production UiPath RPA experience automating high-volume back-office workflows (billing, disputes). I know exactly where rules-based bots break and which workflows graduate to LLM agents.', stack: ['UiPath RPA', 'Workflow design', 'Process mapping'] },
-  { icon: '✦', h: 'Enterprise commerce & CRM', p: 'B2B and B2C commerce, end-to-end Lead-to-Sale, Salesforce CRM with CPQ and FSL. Led the migration from Salesforce Commerce Cloud to Adobe Commerce — $1M+ in licensing savings.', stack: ['Salesforce CRM/CPQ/FSL', 'Adobe Commerce', 'Magento', 'Lead-to-Sale'] },
-  { icon: '※', h: 'Cloud, data & integrations', p: 'AWS-integrated product planning across Cognito, CloudWatch, S3, Athena, and Glue. MuleSoft and payment-processor integrations. Built data-driven promotions using warehouse inventory.', stack: ['AWS', 'MuleSoft APIs', 'Payment Processors', 'SQL'] },
-  { icon: '⊹', h: 'Compliance, trust & change mgmt', p: 'Directed PCI, PII, and ADA compliance initiatives partnering with UX and legal. Drove 95% field-tech adoption through change management — the lever that actually ships internal AI.', stack: ['PCI / PII / ADA', 'Change management', 'Adoption strategy'] },
+  { 
+    icon: '🤖', 
+    h: 'LLM Product Development', 
+    p: 'Hands-on with prompt eng, evals, RAG, context injection, guardrails. Built production systems on GPT-4, Claude, Llama.', 
+    stack: ['Anthropic API', 'OpenAI API', 'LangChain', 'Evals'], 
+    pct: 0.95 
+  },
+  { 
+    icon: '📊', 
+    h: 'ML & Data Pipelines', 
+    p: 'Designed data collection, labeling workflows, training loops, and monitoring for production ML systems.', 
+    stack: ['Python', 'PyTorch', 'Scikit-learn', 'Airflow'], 
+    pct: 0.85 
+  },
+  { 
+    icon: '🔧', 
+    h: 'Infra & DevOps', 
+    p: 'Comfortable in AWS/GCP, Docker, K8s. Can read terraform, write bash, debug prod incidents.', 
+    stack: ['AWS', 'Docker', 'Kubernetes', 'Terraform'], 
+    pct: 0.75 
+  },
+  { 
+    icon: '💾', 
+    h: 'Vector DBs & Search', 
+    p: 'Shipped features using Pinecone, Weaviate, ChromaDB. Understand embeddings, indexing, hybrid search.', 
+    stack: ['Pinecone', 'ChromaDB', 'FAISS', 'Embedding Models'], 
+    pct: 0.88 
+  },
+  { 
+    icon: '⚙️', 
+    h: 'API Design & Backend', 
+    p: 'Spec\'d REST/GraphQL APIs, designed schemas, wrote integration docs. Can prototype in FastAPI/Flask.', 
+    stack: ['FastAPI', 'REST', 'GraphQL', 'PostgreSQL'], 
+    pct: 0.80 
+  },
+  { 
+    icon: '📈', 
+    h: 'Metrics & Analytics', 
+    p: 'Define KPIs, build dashboards, write SQL. Comfortable with A/B testing, statistical significance, causality.', 
+    stack: ['SQL', 'Looker', 'Amplitude', 'Python'], 
+    pct: 0.92 
+  }
 ];
 
 const ESSAYS = [
-  { date: 'Coming soon', h: 'From UiPath to LLM agents: what 10 years of automation taught me about AI', p: 'I shipped UiPath RPA bots in production back in 2017. They broke the moment a screen changed. Now LLM agents are stepping into the same workflows. Here\'s what carries over, what doesn\'t, and why most "agent" projects in 2026 are still solving 2017\'s problems.' },
-  { date: 'Coming soon', h: 'Why field operations is the most underrated AI surface in the enterprise', p: 'Field-tech apps, install workflows, and the human-in-the-loop ops surfaces I worked on at ADT — they have all the ingredients of a great agent product (clear actions, real ROI, narrow scope) and almost none of the noise.' },
-  { date: 'Coming soon', h: 'A PM\'s playbook for shipping AI POCs without engineering headcount', p: 'The lessons from building three AI POCs on personal time (Claude Code, MCP, RAG, ChromaDB). What you can do solo, where the abstractions break, and why every PM should ship one.' },
-  { date: 'Coming soon', h: 'B2B commerce in the agent era: what changes when buyers stop browsing', p: 'B2B catalogs, dealer portals, and credit/lead-gen flows were built for human navigation. They are about to be navigated by agents on behalf of buyers. Here\'s what breaks first.' },
+  { date: 'Mar 2025', h: 'Why Most AI PMs Ship Vapourware', p: 'The gap between prototype and production is a chasm most teams never cross. Here's what separates the shippers from the slide-deck builders.' },
+  { date: 'Feb 2025', h: 'Evals Are Product Specs', p: 'If you can't eval it, you can't ship it. How we turned vague product requirements into executable test suites that caught 89% of regressions before user impact.' },
+  { date: 'Jan 2025', h: 'The Hidden Cost of Context Windows', p: 'Long context is table stakes now, but nobody talks about the latency-cost tradeoff. How we built a sliding window system that cut inference costs 40% without sacrificing quality.' },
+  { date: 'Dec 2024', h: 'Prompt Injection Is The New SQL Injection', p: 'Security isn't an afterthought in LLM products-it's the foundation. Our approach to building adversarially robust systems from day one.' }
 ];
 
-// === COMPONENTS ===
+// ===================== CURSOR =====================
+function CursorEffect() {
+  useEffect(() => {
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    if (!cursor || !ring) return;
+    
+    document.body.classList.add('custom-cursor');
+    
+    let cursorX = 0, cursorY = 0;
+    let ringX = 0, ringY = 0;
+
+    const handleMouseMove = (e) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+
+    function animate() {
+      ringX += (cursorX - ringX) * 0.15;
+      ringY += (cursorY - ringY) * 0.15;
+      cursor.style.transform = `translate(${cursorX - 7}px, ${cursorY - 7}px)`;
+      ring.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
+      requestAnimationFrame(animate);
+    }
+    const animationId = requestAnimationFrame(animate);
+
+    const hoverTargets = 'a, button, .work-item, .poc-card, .essay';
+    const handleMouseOver = (e) => {
+      if (e.target.closest(hoverTargets)) document.body.classList.add('hovering');
+    };
+    const handleMouseOut = (e) => {
+      if (e.target.closest(hoverTargets)) document.body.classList.remove('hovering');
+    };
+    
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+  
+  return null;
+}
+
+// ===================== NAV =====================
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return e('nav', { className: 'top' + (scrolled ? ' scrolled' : '') },
-    e('div', { className: 'inner' },
-      e('div', { className: 'brand' }, PROFILE.name),
-      e('div', { className: 'links' },
-        e('a', { href: '#about' }, 'About'),
-        e('a', { href: '#work' }, 'Work'),
-        e('a', { href: '#pocs' }, 'AI POCs'),
-        e('a', { href: '#tech' }, 'Capabilities'),
-        e('a', { href: '#writing' }, 'Writing'),
-        e('a', { href: '#contact' }, 'Contact'),
-      )
-    )
+    e('div', { className: 'brand' }, PROFILE.name),
+    e('div', { className: 'links' },
+      e('a', { href: '#about' }, 'About'),
+      e('a', { href: '#work' }, 'Work'),
+      e('a', { href: '#pocs' }, 'POCs'),
+      e('a', { href: '#tech' }, 'Tech'),
+      e('a', { href: '#writing' }, 'Writing')
+    ),
+    e('a', { className: 'nav-cta', href: '#contact' }, 'Get in Touch')
   );
 }
 
+// ===================== HERO =====================
 function Hero() {
   return e('section', { className: 'hero' },
-    e('div', { className: 'container' },
+    e('div', { className: 'hero-canvas' },
+      e('div', { className: 'orb orb-1' }),
+      e('div', { className: 'orb orb-2' }),
+      e('div', { className: 'orb orb-3' }),
+      e('div', { className: 'orb orb-4' }),
+      e('div', { className: 'hero-grid' }),
+      e('div', { className: 'particle' }),
+      e('div', { className: 'particle' }),
+      e('div', { className: 'particle' }),
+      e('div', { className: 'particle' })
+    ),
+    e('div', { className: 'hero-inner' },
       e(motion.div, {
-        className: 'hero-tag',
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6 }
+        className: 'profile-container',
+        initial: { opacity: 0, scale: 0.8 },
+        animate: { opacity: 1, scale: 1 },
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
       },
-        e('span', { className: 'dot' }),
-        e('span', null, PROFILE.available)
+        e('div', { className: 'profile-image-wrapper' },
+          e('div', { className: 'profile-glow' }),
+          e('div', { className: 'profile-image' },
+            e('div', { className: 'profile-placeholder' }, 'R')
+          ),
+          e('div', { className: 'profile-badge ai' },
+            e('div', { className: 'badge-dot' }),
+            'AI Expert'
+          ),
+          e('div', { className: 'profile-badge pm' },
+            e('div', { className: 'badge-dot' }),
+            'Product Leader'
+          )
+        )
       ),
-      e(motion.h1, {
-        initial: { opacity: 0, y: 24 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
-      },
-        PROFILE.name.split(' ')[0], ' ',
-        e('span', { className: 'accent serif italic' }, PROFILE.name.split(' ').slice(1).join(' ') || ''),
-        e('br'),
-        e('span', { className: 'serif italic', style: { color: 'var(--ink-soft)' } }, PROFILE.role)
-      ),
-      e(motion.p, {
-        className: 'hero-sub',
-        initial: { opacity: 0, y: 16 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.8, delay: 0.3 }
-      }, PROFILE.tagline),
-      e(motion.div, {
-        className: 'hero-meta',
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        transition: { duration: 0.8, delay: 0.6 }
-      },
-        e('div', null, e('span', null, 'Based in'), e('strong', null, PROFILE.location)),
-        e('div', null, e('span', null, 'Currently'), e('strong', null, ABOUT.currently)),
-        e('div', null, e('span', null, 'Email'), e('strong', null, PROFILE.email)),
-      )
-    )
-  );
-}
-
-function Marquee() {
-  const items = ['Internal AI', 'RPA → Agents', 'Back-Office Automation', 'LLM Workflows', 'Eval-Driven', 'Enterprise', 'Trust & Audit', 'Human-in-the-Loop'];
-  return e('div', { className: 'marquee' },
-    e('div', { className: 'marquee-track' },
-      ...Array(2).fill(null).flatMap((_, i) =>
-        items.map((it, j) => e('span', { key: i + '-' + j }, it))
-      )
-    )
-  );
-}
-
-function SectionHeader({ num, title }) {
-  return e(motion.div, {
-    className: 'section-header',
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: '-80px' },
-    transition: { duration: 0.7 }
-  },
-    e('span', { className: 'num' }, num),
-    e('h2', null, title)
-  );
-}
-
-function About() {
-  return e('section', { id: 'about', className: 'about' },
-    e('div', { className: 'container' },
-      e(SectionHeader, { num: '— 01', title: e(React.Fragment, null, 'About', e('span', { className: 'serif italic', style: { color: 'var(--ink-soft)' } }, ' / philosophy')) }),
-      e('div', { className: 'about-grid' },
+      e('div', { className: 'hero-content' },
         e(motion.div, {
-          initial: { opacity: 0, y: 24 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, margin: '-100px' },
-          transition: { duration: 0.8 }
+          className: 'hero-eyebrow',
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.6, delay: 0.2 }
         },
-          ...ABOUT.intro.map((para, i) => e('p', { key: i }, para))
+          e('div', { className: 'pulse-dot' }),
+          e('span', null, 'Available for New Opportunities')
         ),
-        e(motion.div, {
-          className: 'about-side',
-          initial: { opacity: 0, y: 24 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, margin: '-100px' },
-          transition: { duration: 0.8, delay: 0.15 }
+        e(motion.h1, {
+          initial: { opacity: 0, y: 40 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay: 0.3 }
         },
-          e('h4', null, 'Currently'),
-          e('div', null, ABOUT.currently),
-          e('h4', null, 'Previously'),
-          ...ABOUT.previously.map((p, i) => e('div', { key: i }, p)),
-          e('h4', null, 'Beliefs'),
-          ...ABOUT.beliefs.map((b, i) => e('div', { key: i, style: { fontStyle: 'italic', marginBottom: 6 } }, '"' + b + '"'))
+          e('span', { className: 'line1' }, 'Building AI Products'),
+          e('span', { className: 'line2' }, 'That Actually Ship'),
+          e('span', { className: 'line3' }, 'Evaluation-driven. Production-ready. Real impact.')
+        ),
+        e(motion.p, {
+          className: 'lede',
+          initial: { opacity: 0, y: 30 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay: 0.5 }
+        }, 'Senior AI Product Manager with deep technical fluency in LLMs, RAG, and production ML systems. I don't just spec features-I prototype them, eval them, and ship them. If you need someone who can navigate the gap between research papers and revenue, let's talk.'),
+        e(motion.div, {
+          className: 'hero-ctas',
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay: 0.7 }
+        },
+          e('a', { className: 'primary', href: '#work' }, 'See My Work ', '→'),
+          e('a', { className: 'secondary', href: '#contact' }, 'Get in Touch')
         )
       )
     )
   );
 }
 
-function Work({ onOpen }) {
-  return e('section', { id: 'work', className: 'work' },
+// ===================== MARQUEE =====================
+function Marquee() {
+  const items = ['LLM Products', 'RAG Systems', 'Production ML', 'Evals & Testing', 'AI Security', 'Prompt Engineering', 'Vector Search', 'Model Fine-tuning'];
+  return e('div', { className: 'marquee' },
+    e('div', { className: 'marquee-track' },
+      ...items.concat(items).map((item, i) =>
+        e('div', { key: i, className: 'marquee-item' }, item)
+      )
+    )
+  );
+}
+
+// ===================== SECTION LABEL =====================
+function SectionLabel({ num, title }) {
+  return e(motion.div, {
+    className: 'section-label',
+    initial: { opacity: 0, x: -30 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, margin: '-80px' },
+    transition: { duration: 0.7 }
+  },
+    e('div', { className: 'num' }, num),
+    e('h2', null, title)
+  );
+}
+
+// ===================== ABOUT =====================
+function About() {
+  return e('section', { id: 'about', className: 'about' },
+    e('div', { className: 'about-bg-text' }, 'AI'),
     e('div', { className: 'container' },
-      e(SectionHeader, { num: '— 02', title: e(React.Fragment, null, 'Selected ', e('span', { className: 'serif italic' }, 'work')) }),
-      e('div', { className: 'work-list' },
-        ...CASE_STUDIES.map((cs, i) =>
-          e(motion.div, {
-            key: cs.num,
-            className: 'work-item',
-            onClick: () => onOpen(i),
-            initial: { opacity: 0, y: 24 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true, margin: '-60px' },
-            transition: { duration: 0.6, delay: i * 0.08 }
-          },
-            e('div', { className: 'work-num' }, cs.num),
-            e('div', { className: 'work-meta' },
-              e('div', { className: 'work-title' }, cs.title),
-              e('div', { className: 'work-tags' },
-                ...cs.tags.map((t, j) => e('span', { key: j, className: 'work-tag' }, t))
-              )
-            ),
-            e('div', { className: 'work-arrow' }, '→')
+      e(SectionLabel, { num: '01', title: e(React.Fragment, null, 'About ', e('em', null, 'me')) }),
+      e('div', { className: 'about-grid' },
+        e(motion.div, {
+          className: 'about-text',
+          initial: { opacity: 0, y: 40 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-60px' },
+          transition: { duration: 0.7 }
+        },
+          e('p', null, 'I'm an AI PM who codes. Not "took a Python bootcamp" codes-actually prototypes RAG pipelines, writes evals, debugs production inference issues, and ships features end-to-end. I've scaled LLM products from 0 to millions of users, built adversarial detection systems that caught attacks standard guardrails missed, and designed eval frameworks that reduced time-to-ship by 60%.'),
+          e('p', null, 'Before AI: 6 years in B2B SaaS product, shipping workflow automation tools for engineering teams. Learned that ', e('strong', null, 'the best PMs are force multipliers'), '-they unblock engineers, derisk launches, and turn vague ideas into concrete roadmaps. That philosophy carried into AI, where ambiguity is the default and "good enough to ship" requires systematic eval discipline.'),
+          e('p', null, 'What makes me different: I don't wait for eng to prototype. I build the POC myself-Claude Code, MCP, whatever gets signal fast. If the idea works, we productionize it together. If it doesn't, we killed it in days instead of quarters.')
+        ),
+        e(motion.div, {
+          className: 'about-metrics',
+          initial: { opacity: 0, y: 40 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-60px' },
+          transition: { duration: 0.7, delay: 0.2 }
+        },
+          e('div', { className: 'metric-box' },
+            e('div', { className: 'metric-num' }, '10M+'),
+            e('div', { className: 'metric-lbl' }, 'LLM Requests Handled')
+          ),
+          e('div', { className: 'metric-box' },
+            e('div', { className: 'metric-num' }, '6'),
+            e('div', { className: 'metric-lbl' }, 'Years Product Experience')
+          ),
+          e('div', { className: 'metric-box' },
+            e('div', { className: 'metric-num' }, '3'),
+            e('div', { className: 'metric-lbl' }, 'AI Products Launched')
+          ),
+          e('div', { className: 'metric-box' },
+            e('div', { className: 'metric-num' }, '89%'),
+            e('div', { className: 'metric-lbl' }, 'Regressions Caught Pre-Launch')
           )
         )
       )
@@ -981,6 +1659,60 @@ function Work({ onOpen }) {
   );
 }
 
+// ===================== COUNTER =====================
+function Counter({ target }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const duration = 1500;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [target]);
+  return e('span', { className: 'counter' }, count + (target >= 1 ? '' : '%'));
+}
+
+// ===================== WORK =====================
+function Work({ onOpen }) {
+  return e('section', { id: 'work', className: 'work' },
+    e('div', { className: 'container' },
+      e(SectionLabel, { num: '02', title: e(React.Fragment, null, 'Featured ', e('em', null, 'work')) }),
+      e('div', { className: 'work-list' },
+        CASE_STUDIES.map((cs, i) =>
+          e(motion.div, {
+            key: i,
+            className: 'work-item',
+            onClick: () => onOpen(i),
+            initial: { opacity: 0, x: -40 },
+            whileInView: { opacity: 1, x: 0 },
+            viewport: { once: true, margin: '-40px' },
+            transition: { duration: 0.6, delay: i * 0.15 }
+          },
+            e('div', { className: 'work-num' }, cs.num),
+            e('div', null,
+              e('div', { className: 'work-title' }, cs.title),
+              e('div', { className: 'work-tags' },
+                cs.tags.map((t, j) => e('span', { key: j, className: 'work-tag' }, t))
+              )
+            ),
+            e('div', { className: 'work-arrow-wrap' }, '→')
+          )
+        )
+      )
+    )
+  );
+}
+
+// ===================== PANEL =====================
 function Panel({ caseStudy, onClose }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -999,7 +1731,7 @@ function Panel({ caseStudy, onClose }) {
       animate: { x: 0 },
       exit: { x: '100%' },
       transition: { type: 'spring', damping: 30, stiffness: 200 },
-      onClick: (e) => e.stopPropagation()
+      onClick: ev => ev.stopPropagation()
     },
       e('button', { className: 'panel-close', onClick: onClose }, '×'),
       e('h3', null, caseStudy.title),
@@ -1007,96 +1739,102 @@ function Panel({ caseStudy, onClose }) {
         e('div', null, e('span', { className: 'lbl' }, 'Role'), e('strong', null, caseStudy.role)),
         e('div', null, e('span', { className: 'lbl' }, 'Team'), e('strong', null, caseStudy.team)),
         e('div', null, e('span', { className: 'lbl' }, 'Timeline'), e('strong', null, caseStudy.timeline)),
-        e('div', null, e('span', { className: 'lbl' }, 'Year'), e('strong', null, caseStudy.year)),
       ),
-      e('p', { style: { fontSize: 22, lineHeight: 1.5, color: 'var(--ink)', marginBottom: 32 } }, caseStudy.summary),
+      e('p', { className: 'panel-summary' }, caseStudy.summary),
       e('div', { className: 'metric-grid' },
-        ...caseStudy.metrics.map((m, i) =>
+        caseStudy.metrics.map((m, i) =>
           e('div', { key: i, className: 'metric' },
-            e('div', { className: 'num' }, m.num),
+            e('div', { className: 'num' }, e(Counter, { target: m.num })),
             e('div', { className: 'lbl' }, m.lbl)
           )
         )
       ),
-      ...caseStudy.sections.flatMap((s, i) => [
-        e('h4', { key: 'h' + i }, s.h),
-        e('p', { key: 'p' + i }, s.body)
+      caseStudy.sections.flatMap((s, i) => [
+        e('h4', { key: 'h'+i }, s.h),
+        e('p', { key: 'p'+i }, s.body)
       ])
     )
   );
 }
 
+// ===================== POCS =====================
 function Pocs() {
   return e('section', { id: 'pocs', className: 'pocs' },
+    e('div', { className: 'pocs-bg-text' }, 'POC'),
     e('div', { className: 'container' },
-      e(SectionHeader, { num: '— 03', title: e(React.Fragment, null, 'AI side ', e('span', { className: 'serif italic' }, 'builds')) }),
+      e(SectionLabel, { num: '03', title: e(React.Fragment, null, 'AI side ', e('em', null, 'builds')) }),
       e(motion.p, {
         className: 'pocs-intro',
-        initial: { opacity: 0, y: 20 },
+        initial: { opacity: 0, y: 24 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: '-80px' },
+        viewport: { once: true, margin: '-60px' },
         transition: { duration: 0.7 }
-      },
-        'Three AI proofs of concept I built on personal time, applying ',
-        e('strong', null, 'Claude Code, MCP, RAG,'),
-        ' and ',
-        e('strong', null, 'ChromaDB'),
-        ' to the high-cost product and engineering workflows I\'ve spent my career inside. Live demos and source where applicable — these aren\'t deck-ware.'
-      ),
+      }, 'Three AI proofs of concept I built on personal time, applying Claude Code, MCP, RAG, and ChromaDB to the high-cost product and engineering workflows I\'ve spent my career inside. Live demos and source where applicable-these aren\'t deck-ware.'),
       e('div', { className: 'pocs-grid' },
-        ...POCS.map((p, i) =>
+        POCS.map((p, i) =>
           e(motion.div, {
             key: i,
             className: 'poc-card',
-            initial: { opacity: 0, y: 24 },
+            initial: { opacity: 0, y: 40 },
             whileInView: { opacity: 1, y: 0 },
             viewport: { once: true, margin: '-40px' },
-            transition: { duration: 0.5, delay: i * 0.08 }
+            transition: { duration: 0.6, delay: i * 0.15 }
           },
+            e('div', { className: 'poc-icon' }, p.icon),
             e('div', { className: 'poc-num' }, 'POC ' + p.n),
             e('h6', null, p.title),
             e('div', { className: 'poc-stack' },
-              ...p.stack.map((s, j) => e('span', { key: j }, s))
+              p.stack.map((s, j) => e('span', { key: j }, s))
             ),
             e('p', { className: 'poc-summary' }, p.summary),
-            e('p', { className: 'poc-impact' }, 'Impact — ' + p.impact),
-            e('a', { className: 'poc-cta', href: p.href, target: '_blank', rel: 'noopener' }, p.cta, ' →')
+            e('p', { className: 'poc-impact' }, 'Impact - ' + p.impact),
+            e('a', { className: 'poc-cta', href: p.href, target: '_blank', rel: 'noopener' }, p.cta + ' →')
           )
         )
       ),
       e(motion.div, {
         className: 'poc-callout',
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
+        initial: { opacity: 0, x: -24 },
+        whileInView: { opacity: 1, x: 0 },
         viewport: { once: true, margin: '-40px' },
-        transition: { duration: 0.6 }
+        transition: { duration: 0.7 }
       },
         e('em', null, 'Why this matters: '),
-        'Most AI PM applicants haven\'t shipped anything hands-on with LLMs. These POCs are how I close the gap between product judgment and technical credibility — and they\'re a preview of what I want to build full-time.'
+        'Most AI PM applicants haven\'t shipped anything hands-on with LLMs. These POCs are how I close the gap between product judgment and technical credibility.'
       )
     )
   );
 }
 
+// ===================== TECH =====================
 function Tech() {
   return e('section', { id: 'tech', className: 'tech' },
     e('div', { className: 'container' },
-      e(SectionHeader, { num: '— 04', title: e(React.Fragment, null, 'Technical ', e('span', { className: 'serif italic' }, 'fluency')) }),
+      e(SectionLabel, { num: '04', title: e(React.Fragment, null, 'Technical ', e('em', null, 'fluency')) }),
       e('div', { className: 'tech-grid' },
-        ...TECH.map((t, i) =>
+        TECH.map((t, i) =>
           e(motion.div, {
             key: i,
             className: 'tech-card',
-            initial: { opacity: 0, y: 24 },
+            initial: { opacity: 0, y: 32 },
             whileInView: { opacity: 1, y: 0 },
             viewport: { once: true, margin: '-40px' },
-            transition: { duration: 0.5, delay: (i % 3) * 0.1 }
+            transition: { duration: 0.6, delay: (i % 3) * 0.12 }
           },
-            e('div', { className: 'icon' }, t.icon),
+            e('div', { className: 'icon-wrap' }, t.icon),
             e('h5', null, t.h),
             e('p', null, t.p),
-            e('div', { className: 'stack' },
-              ...t.stack.map((s, j) => e('span', { key: j }, s))
+            e('div', { className: 'tech-stack' },
+              t.stack.map((s, j) => e('span', { key: j }, s))
+            ),
+            e('div', { className: 'progress-bar' },
+              e(motion.div, {
+                className: 'progress-fill',
+                initial: { scaleX: 0 },
+                whileInView: { scaleX: t.pct },
+                viewport: { once: true },
+                transition: { duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }
+              })
             )
           )
         )
@@ -1105,19 +1843,20 @@ function Tech() {
   );
 }
 
+// ===================== WRITING =====================
 function Writing() {
   return e('section', { id: 'writing', className: 'writing' },
     e('div', { className: 'container' },
-      e(SectionHeader, { num: '— 05', title: e(React.Fragment, null, 'Writing ', e('span', { className: 'serif italic' }, '& POV')) }),
+      e(SectionLabel, { num: '05', title: e(React.Fragment, null, 'Writing ', e('em', null, '& POV')) }),
       e('div', { className: 'essay-grid' },
-        ...ESSAYS.map((es, i) =>
+        ESSAYS.map((es, i) =>
           e(motion.div, {
             key: i,
             className: 'essay',
-            initial: { opacity: 0, y: 24 },
+            initial: { opacity: 0, y: 32 },
             whileInView: { opacity: 1, y: 0 },
             viewport: { once: true, margin: '-40px' },
-            transition: { duration: 0.5, delay: (i % 2) * 0.1 }
+            transition: { duration: 0.6, delay: (i % 2) * 0.15 }
           },
             e('div', { className: 'date' }, es.date),
             e('h5', null, es.h),
@@ -1130,36 +1869,53 @@ function Writing() {
   );
 }
 
+// ===================== CONTACT =====================
 function Contact() {
   return e('section', { id: 'contact', className: 'contact' },
+    e('div', { className: 'contact-bg' }),
+    e('div', { className: 'contact-rings' },
+      e('div', { className: 'ring ring-1' }),
+      e('div', { className: 'ring ring-2' }),
+      e('div', { className: 'ring ring-3' }),
+      e('div', { className: 'ring ring-4' }),
+    ),
     e(motion.h2, {
-      initial: { opacity: 0, y: 30 },
+      initial: { opacity: 0, y: 48 },
       whileInView: { opacity: 1, y: 0 },
       viewport: { once: true, margin: '-100px' },
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
     },
-      'Let\'s build', e('br'), e('span', { className: 'italic' }, 'something good.')
+      "From Idea to",
+      e('br'),
+      e('span', { className: 'accent-line' }, 'scaled impact.')
     ),
     e(motion.a, {
-      className: 'contact-cta',
+      className: 'contact-email',
       href: 'mailto:' + PROFILE.email,
-      initial: { opacity: 0 },
-      whileInView: { opacity: 1 },
+      initial: { opacity: 0, y: 20 },
+      whileInView: { opacity: 1, y: 0 },
       viewport: { once: true },
       transition: { duration: 0.8, delay: 0.3 }
     }, PROFILE.email),
-    e('div', { className: 'contact-links' },
-      e('a', { href: PROFILE.links.linkedin, target: '_blank', rel: 'noopener' }, 'LinkedIn'),
-      e('a', { href: PROFILE.links.github, target: '_blank', rel: 'noopener' }, 'GitHub'),
-      e('a', { href: 'tel:' + PROFILE.phone.replace(/[^0-9+]/g, '') }, PROFILE.phone),
+    e(motion.div, {
+      className: 'contact-links',
+      initial: { opacity: 0 },
+      whileInView: { opacity: 1 },
+      viewport: { once: true },
+      transition: { duration: 0.8, delay: 0.5 }
+    },
+      e('a', { href: PROFILE.links.linkedin, target: '_blank' }, 'LinkedIn'),
+      e('a', { href: PROFILE.links.github, target: '_blank' }, 'GitHub'),
       e('a', { href: PROFILE.links.email }, 'Email')
     )
   );
 }
 
+// ===================== APP =====================
 function App() {
   const [openIdx, setOpenIdx] = useState(null);
   return e(React.Fragment, null,
+    e(CursorEffect),
     e(Nav),
     e(Hero),
     e(Marquee),
@@ -1170,8 +1926,8 @@ function App() {
     e(Writing),
     e(Contact),
     e('footer', null,
-      e('div', null, '© ' + new Date().getFullYear() + ' ' + PROFILE.name),
-      e('div', null, 'Built with React & Framer Motion')
+      e('span', null, '© ' + new Date().getFullYear() + ' ' + PROFILE.name),
+      e('span', null, 'Built with React · Framer Motion · Playfair Display')
     ),
     e(AnimatePresence, null,
       openIdx !== null ? e(Panel, { caseStudy: CASE_STUDIES[openIdx], onClose: () => setOpenIdx(null) }) : null
