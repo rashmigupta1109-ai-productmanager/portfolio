@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rashmi Gupta - Senior AI Product Manager</title>
-<meta name="description" content="AI Product Manager. Building evaluation-driven LLM products that ship and work in production." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>Rashmi Gupta - Senior Product Manager | SaaS, eCommerce, IoT</title>
+<meta name="description" content="Senior Product Manager with 10+ years delivering enterprise transformation. $70M+ cost optimization, $28M+ revenue growth across SaaS, eCommerce, and IoT products." />
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF6B6B'/%3E%3Cstop offset='100%25' style='stop-color:%23A855F7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23g)'/%3E%3Cpath d='M35 40 L35 70 L50 55 L65 70 L65 40 M42 48 L42 58 M50 45 L50 60 M58 48 L58 58' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='72' cy='28' r='8' fill='%2300D9FF'/%3E%3C/svg%3E" />
@@ -1244,25 +1244,146 @@
   }
   @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; gap: 56px; }
+    .about-metrics { grid-template-columns: repeat(2, 1fr); }
     .tech-grid { grid-template-columns: repeat(2, 1fr); }
     .essay-grid { grid-template-columns: 1fr; }
     .panel { width: 100%; max-width: none; padding: 60px 40px; }
+    .panel h3 { font-size: 36px; }
   }
   @media (max-width: 640px) {
-    .container { padding: 0 24px; }
-    nav.top { padding: 16px 24px; }
+    /* Disable custom cursor on mobile */
+    body.custom-cursor { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+    
+    /* Spacing */
+    .container { padding: 0 20px; }
+    nav.top { padding: 16px 20px; }
     nav.top .links { display: none; }
-    .hero-inner { padding: 140px 24px 80px; }
-    .profile-image-wrapper { width: 220px; height: 220px; }
-    .profile-image { width: 220px; height: 220px; }
-    .hero h1 { font-size: 48px; }
-    .section-label { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .tech-grid { grid-template-columns: 1fr; }
-    .work-item { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
-    .work-arrow-wrap { margin-left: 0; }
-    .pocs-grid { grid-template-columns: 1fr; }
-    .metric-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; }
+    nav.top .brand { font-size: 18px; }
+    nav.top .nav-cta { padding: 8px 18px; font-size: 12px; }
+    
+    /* Hero */
+    .hero-inner { padding: 120px 20px 60px; gap: 32px; }
+    .profile-image-wrapper { width: 180px; height: 180px; }
+    .profile-image { width: 180px; height: 180px; }
+    .profile-placeholder { font-size: 56px; }
+    .profile-badge { font-size: 10px; padding: 6px 12px; }
+    .profile-badge.ai { top: 5%; right: -8%; }
+    .profile-badge.pm { bottom: 10%; left: -12%; }
+    .hero-eyebrow { font-size: 11px; padding: 6px 14px 6px 8px; margin-bottom: 24px; }
+    .hero h1 { font-size: 40px; margin-bottom: 20px; }
+    .hero p.lede { font-size: 16px; line-height: 1.6; margin-bottom: 32px; }
+    .hero-ctas { gap: 12px; flex-direction: column; width: 100%; }
+    .hero-ctas a { width: 100%; justify-content: center; padding: 14px 28px; font-size: 14px; }
+    
+    /* Marquee */
+    .marquee-item { font-size: 13px; padding: 0 24px; }
+    
+    /* Section labels */
+    .section-label { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 40px; }
+    .section-label h2 { font-size: 32px; }
+    .section-label .num { font-size: 12px; }
+    
+    /* About */
+    section.about { padding: 80px 0; }
+    .about-text p { font-size: 16px; line-height: 1.7; }
+    .about-metrics { grid-template-columns: 1fr; gap: 16px; }
+    .metric-box { padding: 24px; border-radius: 16px; }
+    .metric-num { font-size: 44px; }
+    
+    /* Work */
+    section.work { padding: 80px 0; }
+    .work-item { 
+      padding: 28px 20px; 
+      flex-direction: column; 
+      align-items: flex-start; 
+      gap: 16px;
+    }
+    .work-num { min-width: auto; font-size: 16px; }
+    .work-title { font-size: 24px; }
+    .work-tag { font-size: 11px; padding: 5px 12px; }
+    .work-arrow-wrap { margin-left: 0; font-size: 24px; align-self: flex-end; }
+    
+    /* Panel */
+    .panel { padding: 60px 24px; }
+    .panel-close { top: 20px; right: 20px; width: 40px; height: 40px; font-size: 24px; }
+    .panel h3 { font-size: 32px; margin-bottom: 24px; }
+    .panel-meta { grid-template-columns: 1fr; gap: 16px; padding-bottom: 24px; margin-bottom: 32px; }
+    .panel-summary { font-size: 16px; margin-bottom: 32px; }
+    .metric-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+    .metric-grid .metric { padding: 20px; }
+    .metric-grid .num { font-size: 36px; }
+    .panel h4 { font-size: 24px; margin: 32px 0 16px; }
+    .panel p { font-size: 15px; }
+    
+    /* POCs */
+    section.pocs { padding: 80px 0; }
+    .pocs-intro { font-size: 16px; margin-bottom: 48px; }
+    .pocs-grid { grid-template-columns: 1fr; gap: 24px; }
+    .poc-card { padding: 32px 24px; border-radius: 20px; }
+    .poc-icon { font-size: 40px; margin-bottom: 20px; }
+    .poc-card h6 { font-size: 22px; }
+    .poc-callout { margin-top: 48px; padding: 24px; font-size: 15px; }
+    
+    /* Tech */
+    section.tech { padding: 80px 0; }
+    .tech-grid { grid-template-columns: 1fr; gap: 20px; }
+    .tech-card { padding: 28px 24px; }
+    .icon-wrap { width: 48px; height: 48px; font-size: 24px; margin-bottom: 20px; }
+    .tech-card h5 { font-size: 20px; }
+    .tech-card p { font-size: 14px; }
+    
+    /* Writing */
+    section.writing { padding: 80px 0; }
+    .essay-grid { gap: 20px; }
+    .essay { padding: 28px 24px; }
+    .essay h5 { font-size: 20px; }
+    .essay p { font-size: 14px; }
+    
+    /* Contact */
+    section.contact { padding: 80px 20px; min-height: 80vh; }
+    .contact h2 { font-size: 40px; margin-bottom: 32px; }
+    .contact-email { font-size: 24px; margin-bottom: 32px; }
+    .contact-links { flex-direction: column; gap: 20px; }
+    .contact-links a { font-size: 14px; }
+    
+    /* Footer */
+    footer { 
+      padding: 32px 20px; 
+      flex-direction: column; 
+      gap: 12px; 
+      font-size: 12px; 
+      text-align: center; 
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 375px) {
+    .hero h1 { font-size: 36px; }
+    .profile-image-wrapper { width: 160px; height: 160px; }
+    .profile-image { width: 160px; height: 160px; }
+    .contact h2 { font-size: 32px; }
+  }
+  
+  /* Touch devices - disable hover effects */
+  @media (hover: none) and (pointer: coarse) {
+    .work-item:hover,
+    .poc-card:hover,
+    .tech-card:hover,
+    .essay:hover,
+    .metric-box:hover {
+      transform: none;
+    }
+    
+    /* Make tap targets larger */
+    nav.top .nav-cta,
+    .hero-ctas a,
+    .work-item,
+    .poc-cta,
+    .essay,
+    .contact-links a {
+      min-height: 44px;
+    }
   }
 </style>
 </head>
@@ -1286,71 +1407,72 @@ const createRoot = ReactDOM.createRoot;
 // ===================== DATA =====================
 const PROFILE = {
   name: 'Rashmi Gupta',
-  title: 'Senior AI Product Manager',
-  email: 'rashmi@example.com',
+  title: 'Senior Product Manager',
+  location: 'Charlotte, NC',
+  email: 'rashmigupta1109@gmail.com',
   links: {
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    email: 'mailto:rashmi@example.com'
+    linkedin: 'https://www.linkedin.com/in/rashmigupta1109',
+    github: 'https://github.com/rashmigupta',
+    email: 'mailto:rashmigupta1109@gmail.com'
   }
 };
 
 const CASE_STUDIES = [
   {
     num: '01',
-    title: 'AI Context Injection Detection',
-    tags: ['LLM Security', 'Production ML', 'Enterprise'],
-    role: 'Senior AI PM',
-    team: '3 ML Eng, 2 Data Scientists',
-    timeline: 'Q2-Q4 2024',
-    summary: 'Built production system detecting adversarial context injection in customer LLM workflows, reducing attack surface by 73%.',
+    title: 'ADT+ IoT Tech App - Smart Home Integration',
+    tags: ['IoT Product', 'Mobile App', 'Field Operations'],
+    role: 'Product Manager',
+    team: 'Firmware, UX, Field Ops, Engineering',
+    timeline: 'Jul 2019 - Aug 2022',
+    summary: 'Led IoT-enabled ADT+ Tech App for smart home hardware integration, reducing projected install times by 35 minutes and achieving 95% technician adoption.',
     metrics: [
-      { num: 73, lbl: '% Attack Surface Reduced' },
-      { num: 12, lbl: 'ms Avg Inference Latency' },
-      { num: 98, lbl: '% Precision @ 95% Recall' }
+      { num: 35, lbl: 'Min Install Time Reduction' },
+      { num: 95, lbl: '% Technician Adoption' },
+      { num: 3, lbl: 'Product Managers Managed' }
     ],
     sections: [
-      { h: 'Problem', body: 'Enterprise customers running Claude in production faced sophisticated prompt injection attacks that standard guardrails couldn\'t catch. Traditional keyword filtering failed against adversarial examples; we needed a learned detector that could generalize.' },
-      { h: 'Approach', body: 'Shipped a two-stage system: (1) lightweight BERT-based classifier for real-time screening, (2) GPT-4-based adversarial refinement for high-confidence catches. Built custom eval harness with 10K+ adversarial examples from red team exercises and production logs.' },
-      { h: 'Impact', body: 'Reduced successful injection rate from 2.1% to 0.57% across enterprise customers. Inference latency under 12ms p99. Detection model now part of default safety stack for all enterprise deployments.' }
+      { h: 'Challenge', body: 'ADT needed to modernize field operations for smart home installations. Legacy processes were manual, time-consuming, and created poor customer experiences. Installation times were 35+ minutes longer than needed, and technicians lacked tools for efficient IoT device setup.' },
+      { h: 'Solution', body: 'Led end-to-end product development of ADT+ Tech App, collaborating with firmware and UX teams to create an integrated mobile experience. Designed omni-channel workflows spanning e-commerce, in-store sales, field technician apps, and post-sale service across Salesforce and mobile platforms. Managed 3 product managers to align roadmaps for ADT-Google partnership.' },
+      { h: 'Impact', body: 'Reduced installation times by 35 minutes per appointment. Achieved 95% technician adoption through targeted training and usability testing. Successfully launched Google Installer App as part of ADT-Google partnership, transforming field operations efficiency.' }
     ]
   },
   {
     num: '02',
-    title: 'Eval-Driven RAG Pipeline',
-    tags: ['RAG', 'Evals', 'Product'],
-    role: 'AI PM Lead',
-    team: '2 ML Eng, 1 Backend, 1 Data Sci',
-    timeline: 'Q1-Q3 2023',
-    summary: 'Launched production RAG system for 500K+ doc corpus with eval framework that caught 89% of retrieval failures before user impact.',
+    title: 'Salesforce Credit App - Lead Generation Platform',
+    tags: ['B2B SaaS', 'CRM', 'Enterprise'],
+    role: 'Product Manager',
+    team: 'Sales, AR, Finance, Compliance, Dev Teams',
+    timeline: 'Aug 2022 - Jan 2026',
+    summary: 'Owned roadmap and delivery of Salesforce-based Credit Application for lead generation, aligning Sales, AR, Finance and Compliance across regions with multiple cross-functional teams.',
     metrics: [
-      { num: 500, lbl: 'K+ Docs Indexed' },
-      { num: 89, lbl: '% Retrieval Failures Caught' },
-      { num: 3.2, lbl: 'x Faster Time to Answer' }
+      { num: 2, lbl: 'M+ Dealer Data Program' },
+      { num: 20, lbl: '+ Product Improvements' },
+      { num: 7.5, lbl: '% Blowout Sales Increase YTD' }
     ],
     sections: [
-      { h: 'Problem', body: 'Internal knowledge base had grown to 500K+ documents. Semantic search was returning irrelevant chunks 40% of the time. No systematic way to know when retrieval was broken until users complained.' },
-      { h: 'Solution', body: 'Built eval-first: started with 200 hand-curated query-doc pairs spanning edge cases (ambiguous queries, synonyms, domain jargon). Implemented continuous eval pipeline running on every index update. Caught regressions in embedding model updates, chunk size changes, and ranking weights before production.' },
-      { h: 'Outcome', body: 'Cut median time-to-answer from 43s to 13s. Relevance scores improved from 62% to 91%. Eval suite now standard for all document retrieval features.' }
+      { h: 'Problem', body: 'Hoonigan needed a unified lead generation and credit application system to streamline B2B dealer workflows. Multiple systems created data silos, compliance risks, and inefficient sales processes across regions. Dealer data applications required major technical upgrades.' },
+      { h: 'Approach', body: 'Led Salesforce CRM enhancements, partnering with RVPs to prioritize backlog and define user stories with acceptance criteria. Managed dashboards, reporting, user access, and delivered custom Salesforce solutions as Admin. Oversaw $2M+ dealer data program, managing 20+ vendor resources to drive major tech upgrades (Angular v8 to v16, Node.js v12 to v18).' },
+      { h: 'Results', body: 'Delivered 20+ product improvements across dealer data suite. Created promotions using warehouse inventory data, increasing blowout sales by 7.5% YTD. Led AWS-integrated product planning (Cognito, CloudWatch, S3, Athena) to streamline costs. Supported ecommerce migration realizing $1M+ in annual licensing savings.' }
     ]
   },
   {
     num: '03',
-    title: 'Streaming Inference at Scale',
-    tags: ['Infrastructure', 'Performance', 'ML Ops'],
-    role: 'Technical PM',
-    team: '4 Infra Eng, 1 SRE',
-    timeline: 'Q3-Q4 2022',
-    summary: 'Scaled streaming LLM inference from 100 to 10K concurrent users, reducing p95 latency by 68% while cutting compute costs 41%.',
+    title: 'Payment Integration & Flexible Financing',
+    tags: ['FinTech', 'Revenue Growth', 'Integration'],
+    role: 'Senior Business Analyst',
+    team: 'Finance, Engineering, Banking Partner',
+    timeline: 'May 2016 - Jun 2019',
+    summary: 'Partnered with Finance to launch payments and flexible financing integrated with Mizuho Bank, leveraging customer credit profiles to drive $28M in upsell revenue.',
     metrics: [
-      { num: 100, lbl: 'x Scale Increase' },
-      { num: 68, lbl: '% Latency Reduction' },
-      { num: 41, lbl: '% Cost Savings' }
+      { num: 28, lbl: 'M+ Upsell Revenue' },
+      { num: 60, lbl: '% Call Reduction' },
+      { num: 5, lbl: 'BAs Managed' }
     ],
     sections: [
-      { h: 'Challenge', body: 'Streaming inference was pinned at 100 concurrent users. p95 latency spiked to 8+ seconds during load. Naive horizontal scaling meant doubling GPU spend for marginal capacity gains.' },
-      { h: 'Execution', body: 'Designed request batching system with dynamic batch assembly based on sequence length and position. Implemented speculative decoding for common prefixes. Built custom load balancer aware of GPU memory state and batch composition.' },
-      { h: 'Results', body: 'Scaled to 10K concurrent users with p95 latency of 2.4s. Cut GPU costs by 41% through better utilization. System now handles 2M+ requests/day in production.' }
+      { h: 'Opportunity', body: 'ADT had significant untapped revenue potential in flexible financing options. Customers with good credit profiles were not being offered appropriate financing packages, leaving money on the table. Manual processes created friction in the sales cycle.' },
+      { h: 'Execution', body: 'Led integration with Mizuho Bank to enable flexible financing options. Built customer credit profiling system to automatically present personalized financing offers. Managed 5 Business Analysts to automate high-volume workflows, reducing operational overhead. Led UiPath RPA proofs of concept for billing and dispute automation.' },
+      { h: 'Impact', body: 'Generated $28M in upsell revenue through intelligent financing recommendations. Achieved 60% call reduction for Authorized Dealer program through workflow automation. Championed Salesforce migration (CPQ, FSL) by mapping as-is/to-be workflows, accelerating delivery timeline.' }
     ]
   }
 ];
@@ -1358,32 +1480,32 @@ const CASE_STUDIES = [
 const POCS = [
   {
     n: '1',
-    icon: '🔍',
-    title: 'Automated Design QA',
-    stack: ['Claude 3.5 Sonnet', 'Vision API', 'Python'],
-    summary: 'Screens Figma exports for accessibility violations, inconsistent spacing, and off-brand colors before handoff.',
-    impact: 'Cuts designer-engineer ping-pong by ~40%. Catches 80%+ of trivial spec issues machines should handle.',
-    cta: 'View Source',
+    icon: '🤖',
+    title: 'AI Knowledge Base & Onboarding Assistant',
+    stack: ['RAG', 'AWS S3 + IAM', 'ChromaDB', 'Vector DB'],
+    summary: 'Built end-to-end AI assistant with secure S3 ingestion, role-based access, and ChromaDB retrieval enabling real-time Q&A over internal documentation.',
+    impact: 'Reduced SME dependency for onboarding and support workflows by enabling self-service knowledge access.',
+    cta: 'Live Demo',
     href: '#'
   },
   {
     n: '2',
     icon: '🎯',
-    title: 'Prompt Regression Detector',
-    stack: ['MCP', 'ChromaDB', 'Claude Code'],
-    summary: 'Embeddings-based test suite that flags when prompt changes degrade outputs on historical examples.',
-    impact: 'Prevents the "fixed one thing, broke three others" cycle. 12 caught regressions in 6 weeks of testing.',
-    cta: 'Live Demo',
+    title: 'AI-Assisted Jira & Dev Workflow Automation',
+    stack: ['Atlassian MCP', 'LLM Orchestration', 'Claude Code'],
+    summary: 'Built AI-augmented PM to Dev workflow enabling natural-language ticketing, automated updates, and execution of UAT fixes.',
+    impact: 'Reduced PM-to-dev turnaround time for low-effort changes through AI-driven automation and prompt-driven execution.',
+    cta: 'View on GitHub',
     href: '#'
   },
   {
     n: '3',
     icon: '⚡',
-    title: 'RAG Eval Dashboard',
-    stack: ['RAG', 'Python', 'Streamlit'],
-    summary: 'Interactive tool for PM-driven eval: upload docs + queries, get precision/recall/latency across chunk strategies.',
-    impact: 'Shortens "is retrieval good enough to ship" from 2 weeks of eng time to 1 hour of PM analysis.',
-    cta: 'Try it',
+    title: 'Real-Time AI Knowledge Assistant',
+    stack: ['Live Ingestion', 'Zero Setup RAG', 'Embeddings'],
+    summary: 'Built chat-based assistant enabling real-time document ingestion, embedding, and querying within single session without pre-configured pipelines.',
+    impact: 'Eliminates setup overhead, enabling rapid prototyping and ad-hoc knowledge workflows for product teams.',
+    cta: 'Live Demo',
     href: '#'
   }
 ];
@@ -1391,53 +1513,53 @@ const POCS = [
 const TECH = [
   { 
     icon: '🤖', 
-    h: 'LLM Product Development', 
-    p: 'Hands-on with prompt eng, evals, RAG, context injection, guardrails. Built production systems on GPT-4, Claude, Llama.', 
-    stack: ['Anthropic API', 'OpenAI API', 'LangChain', 'Evals'], 
-    pct: 0.95 
-  },
-  { 
-    icon: '📊', 
-    h: 'ML & Data Pipelines', 
-    p: 'Designed data collection, labeling workflows, training loops, and monitoring for production ML systems.', 
-    stack: ['Python', 'PyTorch', 'Scikit-learn', 'Airflow'], 
-    pct: 0.85 
-  },
-  { 
-    icon: '🔧', 
-    h: 'Infra & DevOps', 
-    p: 'Comfortable in AWS/GCP, Docker, K8s. Can read terraform, write bash, debug prod incidents.', 
-    stack: ['AWS', 'Docker', 'Kubernetes', 'Terraform'], 
-    pct: 0.75 
-  },
-  { 
-    icon: '💾', 
-    h: 'Vector DBs & Search', 
-    p: 'Shipped features using Pinecone, Weaviate, ChromaDB. Understand embeddings, indexing, hybrid search.', 
-    stack: ['Pinecone', 'ChromaDB', 'FAISS', 'Embedding Models'], 
+    h: 'AI & Modern Tech Stack', 
+    p: 'Hands-on with Claude Code, RAG KB, MCP Integration. Built POCs automating product and dev workflows with AI-driven automation.', 
+    stack: ['Claude Code', 'RAG', 'MCP', 'Vector DB', 'ChromaDB'], 
     pct: 0.88 
   },
   { 
-    icon: '⚙️', 
-    h: 'API Design & Backend', 
-    p: 'Spec\'d REST/GraphQL APIs, designed schemas, wrote integration docs. Can prototype in FastAPI/Flask.', 
-    stack: ['FastAPI', 'REST', 'GraphQL', 'PostgreSQL'], 
-    pct: 0.80 
+    icon: '☁️', 
+    h: 'Cloud & Enterprise Platforms', 
+    p: 'Deep experience with AWS services and Salesforce ecosystem. Led cloud-integrated product planning and CRM implementations.', 
+    stack: ['AWS (Cognito, S3, Athena, Glue)', 'Salesforce CRM', 'CPQ', 'FSL'], 
+    pct: 0.92 
   },
   { 
-    icon: '📈', 
-    h: 'Metrics & Analytics', 
-    p: 'Define KPIs, build dashboards, write SQL. Comfortable with A/B testing, statistical significance, causality.', 
-    stack: ['SQL', 'Looker', 'Amplitude', 'Python'], 
-    pct: 0.92 
+    icon: '🔧', 
+    h: 'Integrations & Automation', 
+    p: 'Led API integrations, payment processors, and RPA automation. Experience with MuleSoft APIs and UiPath for workflow optimization.', 
+    stack: ['MuleSoft APIs', 'UiPath RPA', 'Payment Integration', 'SaaS Platforms'], 
+    pct: 0.85 
+  },
+  { 
+    icon: '🛒', 
+    h: 'eCommerce & B2B Platforms', 
+    p: 'Led ecommerce migrations and B2B platform implementations. Experience with Adobe Commerce (Magento) and Salesforce Commerce Cloud.', 
+    stack: ['Adobe Commerce', 'Magento', 'SF Commerce Cloud', 'B2B/B2C'], 
+    pct: 0.90 
+  },
+  { 
+    icon: '📊', 
+    h: 'Product & Data Analytics', 
+    p: 'Data-driven decision making with SQL, KPI management, and behavior analytics. Experience building dashboards and reporting systems.', 
+    stack: ['SQL', 'KPI Management', 'Data Analytics', 'CloudWatch'], 
+    pct: 0.87 
+  },
+  { 
+    icon: '🎨', 
+    h: 'Product Design & Workflow', 
+    p: 'Strong collaboration with UX/design teams. Proficient in Figma, LucidChart for wireframing, process mapping, and stakeholder alignment.', 
+    stack: ['Figma', 'Jira', 'LucidChart', 'Customer Journey Mapping'], 
+    pct: 0.83 
   }
 ];
 
 const ESSAYS = [
-  { date: 'Mar 2025', h: 'Why Most AI PMs Ship Vapourware', p: 'The gap between prototype and production is a chasm most teams never cross. Here's what separates the shippers from the slide-deck builders.' },
-  { date: 'Feb 2025', h: 'Evals Are Product Specs', p: 'If you can't eval it, you can't ship it. How we turned vague product requirements into executable test suites that caught 89% of regressions before user impact.' },
-  { date: 'Jan 2025', h: 'The Hidden Cost of Context Windows', p: 'Long context is table stakes now, but nobody talks about the latency-cost tradeoff. How we built a sliding window system that cut inference costs 40% without sacrificing quality.' },
-  { date: 'Dec 2024', h: 'Prompt Injection Is The New SQL Injection', p: 'Security isn't an afterthought in LLM products-it's the foundation. Our approach to building adversarially robust systems from day one.' }
+  { date: 'Mar 2025', h: 'From $28M in Revenue to Lessons Learned', p: 'How partnering with Finance to launch flexible financing turned customer credit profiles into a massive revenue opportunity-and what I\'d do differently.' },
+  { date: 'Feb 2025', h: 'The Hidden Cost of Platform Migrations', p: 'Lessons from leading a $1M+ Salesforce Commerce Cloud to Adobe Commerce migration: technical debt, stakeholder alignment, and measuring real ROI.' },
+  { date: 'Jan 2025', h: 'Why Field Ops Apps Fail (And How to Fix Them)', p: 'Achieving 95% technician adoption wasn\'t about features-it was about obsessive focus on workflow integration and hands-on usability testing.' },
+  { date: 'Dec 2024', h: 'RPA vs. AI: When to Automate What', p: 'Real-world lessons from deploying UiPath RPA and building AI-powered assistants. The decision framework that saved our team from automation theater.' }
 ];
 
 // ===================== CURSOR =====================
@@ -1562,16 +1684,16 @@ function Hero() {
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay: 0.3 }
         },
-          e('span', { className: 'line1' }, 'Building AI Products'),
-          e('span', { className: 'line2' }, 'That Actually Ship'),
-          e('span', { className: 'line3' }, 'Evaluation-driven. Production-ready. Real impact.')
+          e('span', { className: 'line1' }, 'Delivering Enterprise'),
+          e('span', { className: 'line2' }, 'Product Excellence'),
+          e('span', { className: 'line3' }, 'SaaS · eCommerce · IoT · AI Automation')
         ),
         e(motion.p, {
           className: 'lede',
           initial: { opacity: 0, y: 30 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay: 0.5 }
-        }, 'Senior AI Product Manager with deep technical fluency in LLMs, RAG, and production ML systems. I don't just spec features-I prototype them, eval them, and ship them. If you need someone who can navigate the gap between research papers and revenue, let's talk.'),
+        }, 'Senior Product Manager driving enterprise transformation through SaaS, eCommerce, IoT, and AI automation. 10+ years delivering measurable impact: $70M+ in cost savings, $28M+ in revenue growth. From Salesforce ecosystems to AWS platforms to AI-powered workflows—I build products that scale and ship.'),
         e(motion.div, {
           className: 'hero-ctas',
           initial: { opacity: 0, y: 20 },
@@ -1588,7 +1710,7 @@ function Hero() {
 
 // ===================== MARQUEE =====================
 function Marquee() {
-  const items = ['LLM Products', 'RAG Systems', 'Production ML', 'Evals & Testing', 'AI Security', 'Prompt Engineering', 'Vector Search', 'Model Fine-tuning'];
+  const items = ['SaaS Platforms', 'eCommerce', 'IoT Products', 'Salesforce CRM', 'AWS Integration', 'API Automation', 'Payment Systems', 'Field Operations', 'B2B Solutions', 'Enterprise Products'];
   return e('div', { className: 'marquee' },
     e('div', { className: 'marquee-track' },
       ...items.concat(items).map((item, i) =>
@@ -1626,9 +1748,9 @@ function About() {
           viewport: { once: true, margin: '-60px' },
           transition: { duration: 0.7 }
         },
-          e('p', null, 'I'm an AI PM who codes. Not "took a Python bootcamp" codes-actually prototypes RAG pipelines, writes evals, debugs production inference issues, and ships features end-to-end. I've scaled LLM products from 0 to millions of users, built adversarial detection systems that caught attacks standard guardrails missed, and designed eval frameworks that reduced time-to-ship by 60%.'),
-          e('p', null, 'Before AI: 6 years in B2B SaaS product, shipping workflow automation tools for engineering teams. Learned that ', e('strong', null, 'the best PMs are force multipliers'), '-they unblock engineers, derisk launches, and turn vague ideas into concrete roadmaps. That philosophy carried into AI, where ambiguity is the default and "good enough to ship" requires systematic eval discipline.'),
-          e('p', null, 'What makes me different: I don't wait for eng to prototype. I build the POC myself-Claude Code, MCP, whatever gets signal fast. If the idea works, we productionize it together. If it doesn't, we killed it in days instead of quarters.')
+          e('p', null, 'I\'m a Senior Product Manager with 10+ years building and scaling SaaS, eCommerce, IoT, and back-office automation products. Across Hoonigan Industries and ADT, I\'ve driven $70M+ in cost optimization and $28M+ in revenue growth by leading enterprise product transformations, RPA-driven automation, and the integration work that actually gets complex roadmaps shipped.'),
+          e('p', null, 'What sets me apart from most "AI PMs" is ', e('strong', null, 'hands-on range and real outcomes'), '. I\'ve owned B2B and B2C platforms, IoT field apps with 95% technician adoption, Salesforce ecosystems (CRM/CPQ/FSL), UiPath automation, and AWS data platforms.'),
+          e('p', null, 'Now I\'m focused on bringing AI agents and LLM-powered workflows into these domains—and I\'ve already built three working AI POCs to prove I can execute, not just lead.')
         ),
         e(motion.div, {
           className: 'about-metrics',
@@ -1638,20 +1760,20 @@ function About() {
           transition: { duration: 0.7, delay: 0.2 }
         },
           e('div', { className: 'metric-box' },
-            e('div', { className: 'metric-num' }, '10M+'),
-            e('div', { className: 'metric-lbl' }, 'LLM Requests Handled')
+            e('div', { className: 'metric-num' }, e(Counter, { target: 10 })),
+            e('div', { className: 'metric-lbl' }, 'Years Experience')
           ),
           e('div', { className: 'metric-box' },
-            e('div', { className: 'metric-num' }, '6'),
-            e('div', { className: 'metric-lbl' }, 'Years Product Experience')
+            e('div', { className: 'metric-num' }, e(Counter, { target: 70, prefix: '$' })),
+            e('div', { className: 'metric-lbl' }, 'Cost Optimization')
           ),
           e('div', { className: 'metric-box' },
-            e('div', { className: 'metric-num' }, '3'),
-            e('div', { className: 'metric-lbl' }, 'AI Products Launched')
+            e('div', { className: 'metric-num' }, e(Counter, { target: 28, prefix: '$' })),
+            e('div', { className: 'metric-lbl' }, 'Revenue Growth')
           ),
           e('div', { className: 'metric-box' },
-            e('div', { className: 'metric-num' }, '89%'),
-            e('div', { className: 'metric-lbl' }, 'Regressions Caught Pre-Launch')
+            e('div', { className: 'metric-num' }, e(Counter, { target: 95, suffix: '%' })),
+            e('div', { className: 'metric-lbl' }, 'User Adoption')
           )
         )
       )
@@ -1660,13 +1782,41 @@ function About() {
 }
 
 // ===================== COUNTER =====================
-function Counter({ target }) {
+function Counter({ target, prefix = '', suffix = '' }) {
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef(null);
+
   useEffect(() => {
-    const duration = 1500;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            animateValue();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [hasAnimated]);
+
+  const animateValue = () => {
+    const duration = 2000;
     const steps = 60;
     const increment = target / steps;
     let current = 0;
+    
     const timer = setInterval(() => {
       current += increment;
       if (current >= target) {
@@ -1676,9 +1826,22 @@ function Counter({ target }) {
         setCount(Math.floor(current));
       }
     }, duration / steps);
-    return () => clearInterval(timer);
-  }, [target]);
-  return e('span', { className: 'counter' }, count + (target >= 1 ? '' : '%'));
+  };
+
+  const displayValue = () => {
+    if (suffix === '%') {
+      return count + suffix;
+    }
+    if (prefix === '$' && count >= 1) {
+      return prefix + count + 'M';
+    }
+    if (count >= 10) {
+      return count + '+';
+    }
+    return count;
+  };
+
+  return e('span', { ref: ref, className: 'counter' }, displayValue());
 }
 
 // ===================== WORK =====================
@@ -1742,12 +1905,19 @@ function Panel({ caseStudy, onClose }) {
       ),
       e('p', { className: 'panel-summary' }, caseStudy.summary),
       e('div', { className: 'metric-grid' },
-        caseStudy.metrics.map((m, i) =>
-          e('div', { key: i, className: 'metric' },
-            e('div', { className: 'num' }, e(Counter, { target: m.num })),
+        caseStudy.metrics.map((m, i) => {
+          const hasPercent = m.lbl.includes('%') || m.lbl.toLowerCase().includes('percent') || m.lbl.toLowerCase().includes('adoption') || m.lbl.toLowerCase().includes('reduction');
+          const hasDollar = m.lbl.includes('$') || m.lbl.toLowerCase().includes('revenue') || m.lbl.toLowerCase().includes('cost') || m.lbl.toLowerCase().includes('savings');
+          
+          return e('div', { key: i, className: 'metric' },
+            e('div', { className: 'num' }, e(Counter, { 
+              target: m.num,
+              suffix: hasPercent ? '%' : '',
+              prefix: hasDollar ? '$' : ''
+            })),
             e('div', { className: 'lbl' }, m.lbl)
-          )
-        )
+          );
+        })
       ),
       caseStudy.sections.flatMap((s, i) => [
         e('h4', { key: 'h'+i }, s.h),
@@ -1769,7 +1939,7 @@ function Pocs() {
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, margin: '-60px' },
         transition: { duration: 0.7 }
-      }, 'Three AI proofs of concept I built on personal time, applying Claude Code, MCP, RAG, and ChromaDB to the high-cost product and engineering workflows I\'ve spent my career inside. Live demos and source where applicable-these aren\'t deck-ware.'),
+      }, 'Three AI proofs of concept I built on personal time, applying Claude Code, MCP, RAG, and ChromaDB to automate high-cost product and engineering workflows. These hands-on POCs demonstrate technical depth beyond traditional PM skills-built to solve real enterprise pain points with modern AI tooling.'),
       e('div', { className: 'pocs-grid' },
         POCS.map((p, i) =>
           e(motion.div, {
@@ -1800,7 +1970,7 @@ function Pocs() {
         transition: { duration: 0.7 }
       },
         e('em', null, 'Why this matters: '),
-        'Most AI PM applicants haven\'t shipped anything hands-on with LLMs. These POCs are how I close the gap between product judgment and technical credibility.'
+        'While most PMs talk about AI strategy, I build the prototypes. These POCs show hands-on technical fluency with modern AI tooling-the kind that accelerates product discovery and earns engineering team credibility from day one.'
       )
     )
   );
