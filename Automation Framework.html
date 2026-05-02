@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI vs RPA vs API — Evaluation Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<style>
+:root {
+  /* Neutrals — warm off-white, deep ink */
+  --bg: #FAFAF7;
+  --bg-soft: #F2F2EC;
+  --surface: #FFFFFF;
+  --ink: #1A1A1F;
+  --ink-2: #45454D;
+  --ink-3: #7A7A82;
+  --line: #E6E5DE;
+  --line-strong: #D5D4CB;
+
+  /* Category colors — share chroma for visual cohesion */
+  --rpa: oklch(0.78 0.08 180);
+  --rpa-ink: oklch(0.42 0.07 180);
+  --rpa-fill: oklch(0.78 0.08 180 / 0.18);
+  --rpa-fill-strong: oklch(0.78 0.08 180 / 0.32);
+
+  --ai: oklch(0.62 0.13 270);
+  --ai-ink: oklch(0.38 0.11 270);
+  --ai-fill: oklch(0.62 0.13 270 / 0.16);
+  --ai-fill-strong: oklch(0.62 0.13 270 / 0.30);
+
+  --api: oklch(0.66 0.13 305);
+  --api-ink: oklch(0.40 0.11 305);
+  --api-fill: oklch(0.66 0.13 305 / 0.16);
+  --api-fill-strong: oklch(0.66 0.13 305 / 0.30);
+
+  --shadow-sm: 0 1px 2px rgba(20,20,30,0.04), 0 1px 1px rgba(20,20,30,0.03);
+  --shadow-md: 0 1px 3px rgba(20,20,30,0.05), 0 8px 24px -12px rgba(20,20,30,0.10);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button { font-family: inherit; }
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 56px 40px 96px;
+}
+
+/* ─── Header ─────────────────────────────────── */
+.header { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 56px; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.title em {
+  font-style: italic;
+  color: var(--ai-ink);
+  font-weight: 500;
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 480px;
+  margin: 0;
+  line-height: 1.5;
+}
+.header-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  text-align: right;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.header-meta div + div { margin-top: 4px; }
+
+/* ─── Main grid: Venn left, Evaluator right ─────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ─── Section header inside panels ────────────── */
+.panel-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+}
+.panel-eyebrow .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: 9px;
+  color: var(--ink-2);
+}
+.panel-eyebrow .line {
+  flex: 1; height: 1px; background: var(--line);
+}
+
+/* ─── Venn panel ───────────────────────────────── */
+.venn-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 32px 28px;
+  position: relative;
+}
+
+.venn-stage {
+  position: relative;
+  aspect-ratio: 1 / 0.92;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.venn-stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.venn-circle {
+  fill-opacity: 1;
+  stroke-width: 1.5;
+  transition: fill-opacity 220ms ease, stroke-width 220ms ease;
+  cursor: pointer;
+}
+.venn-region {
+  fill: transparent;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* dimmed when another region is hovered */
+.venn-stage.has-hover .venn-circle:not(.is-active) { fill-opacity: 0.35; }
+.venn-stage.has-hover .venn-label-group:not(.is-active) { opacity: 0.35; }
+
+.venn-label-group {
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+.venn-label-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.venn-label-bullet {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  fill: var(--ink-2);
+}
+.venn-overlap-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  fill: var(--ink);
+  text-transform: uppercase;
+}
+.venn-overlap-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  fill: var(--ink-2);
+}
+.venn-center {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14px;
+  fill: var(--ink);
+}
+
+/* ─── Tooltip ───────────────────────────────────── */
+.venn-tooltip {
+  position: absolute;
+  background: var(--ink);
+  color: #FAFAF7;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  max-width: 240px;
+  pointer-events: none;
+  z-index: 10;
+  transform: translate(-50%, calc(-100% - 14px));
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+.venn-tooltip.visible { opacity: 1; }
+.venn-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px;
+  background: var(--ink);
+}
+.venn-tooltip .tt-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(250,250,247,0.55);
+  margin-bottom: 4px;
+}
+.venn-tooltip .tt-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+/* ─── Legend below venn ─────────────────────────── */
+.venn-legend {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ─── Evaluator panel ───────────────────────────── */
+.evaluator {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.evaluator h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+}
+.evaluator-sub {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin: 0 0 24px;
+}
+
+/* Slider rows */
+.slider-row { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.slider-row:last-of-type { border-bottom: none; }
+.slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+.slider-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.slider-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+
+/* custom range */
+.range-track-wrap { position: relative; padding: 8px 0; }
+.range-track {
+  position: relative;
+  height: 4px;
+  background: var(--bg-soft);
+  border-radius: 2px;
+}
+.range-fill {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  background: var(--ink);
+  border-radius: 2px;
+  transform-origin: left;
+  transition: background 200ms ease;
+}
+.range-thumb {
+  position: absolute;
+  top: 50%;
+  width: 16px; height: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 120ms ease, border-color 200ms ease;
+  box-shadow: var(--shadow-sm);
+}
+.range-row { position: relative; height: 28px; }
+.range-row input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: grab;
+  z-index: 2;
+}
+.range-row input[type="range"]:active { cursor: grabbing; }
+.range-row input[type="range"]:active + .range-thumb { transform: translate(-50%, -50%) scale(1.15); }
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  margin-top: 8px;
+}
+.range-labels .lab-active { color: var(--ink); font-weight: 500; }
+
+/* ticks */
+.range-ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+.range-tick {
+  width: 1px;
+  height: 8px;
+  background: var(--line-strong);
+  border-radius: 1px;
+}
+.range-tick.middle { height: 10px; background: var(--ink-3); }
+
+/* ─── Recommendation result ────────────────────── */
+.result {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  transition: background 300ms ease, border-color 300ms ease;
+}
+.result.is-rpa { background: var(--rpa-fill); border-color: var(--rpa); }
+.result.is-ai  { background: var(--ai-fill);  border-color: var(--ai); }
+.result.is-api { background: var(--api-fill); border-color: var(--api); }
+
+.result-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.result-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.result-name {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 4px 0 8px;
+  color: var(--ink);
+}
+.result-name .arrow {
+  font-style: normal;
+  margin-left: 4px;
+  display: inline-block;
+  transition: transform 240ms ease;
+}
+.result.changed .result-name .arrow { transform: translateX(4px); }
+.result-reason {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* score bars */
+.score-bars { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.score-row { display: grid; grid-template-columns: 36px 1fr 32px; gap: 10px; align-items: center; }
+.score-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-2);
+  letter-spacing: 0.06em;
+}
+.score-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.score-bar-fill {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  border-radius: 2px;
+  transition: width 380ms cubic-bezier(.2,.8,.2,1);
+}
+.score-bar-fill.s-rpa { background: var(--rpa); }
+.score-bar-fill.s-ai  { background: var(--ai); }
+.score-bar-fill.s-api { background: var(--api); }
+.score-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-2);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Choose cards ─────────────────────────────── */
+.choose-section {
+  margin-top: 56px;
+}
+.choose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.choose-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+  cursor: pointer;
+}
+.choose-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.choose-card.is-rpa:hover { border-color: var(--rpa); }
+.choose-card.is-ai:hover  { border-color: var(--ai); }
+.choose-card.is-api:hover { border-color: var(--api); }
+
+.choose-card .corner-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.choose-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+}
+.choose-icon.is-rpa { background: var(--rpa-fill-strong); color: var(--rpa-ink); }
+.choose-icon.is-ai  { background: var(--ai-fill-strong);  color: var(--ai-ink); }
+.choose-icon.is-api { background: var(--api-fill-strong); color: var(--api-ink); }
+
+.choose-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+.choose-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.choose-when {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.choose-meta {
+  display: flex;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.choose-meta strong { color: var(--ink); font-weight: 500; }
+
+/* ─── At-a-glance footer strip ─────────────────── */
+.glance {
+  margin-top: 56px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.glance-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.glance-title small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+}
+.glance-item-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 8px;
+}
+.glance-item-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+.glance-item-body {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Responsive ───────────────────────────────── */
+@media (max-width: 1080px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .evaluator { position: static; }
+  .choose-grid { grid-template-columns: 1fr; }
+  .glance { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 720px) {
+  .page { padding: 32px 20px 64px; }
+  .header { flex-direction: column; align-items: stretch; }
+  .header-meta { text-align: left; }
+  .title { font-size: 38px; }
+  .venn-panel, .evaluator { padding: 20px; }
+}
+
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+// ─── Categories ───────────────────────────────────
+const CATEGORIES = {
+  rpa: {
+    key: 'rpa',
+    name: 'RPA',
+    full: 'Robotic Process Automation',
+    color: 'var(--rpa)',
+    ink: 'var(--rpa-ink)',
+    fill: 'var(--rpa-fill)',
+    fillStrong: 'var(--rpa-fill-strong)',
+    tagline: 'Repeatable, rule-based',
+    bullets: [
+      'UI automation',
+      'Legacy systems',
+      'Repetitive tasks',
+      'Rule-based flows',
+      'No API available',
+    ],
+    when: 'When tasks are repetitive and systems are UI-driven, with no programmatic access.',
+    speed: 'Days to weeks',
+    cost: 'Low–Medium',
+    risk: 'Brittle to UI change',
+  },
+  ai: {
+    key: 'ai',
+    name: 'AI',
+    full: 'Artificial Intelligence',
+    color: 'var(--ai)',
+    ink: 'var(--ai-ink)',
+    fill: 'var(--ai-fill)',
+    fillStrong: 'var(--ai-fill-strong)',
+    tagline: 'Judgment & unstructured',
+    bullets: [
+      'Unstructured data',
+      'Judgment / reasoning',
+      'Prediction',
+      'Conversation',
+      'Content extraction',
+    ],
+    when: 'When work requires interpretation, reasoning, or unstructured inputs.',
+    speed: 'Weeks',
+    cost: 'Medium–High',
+    risk: 'Probabilistic outputs',
+  },
+  api: {
+    key: 'api',
+    name: 'API',
+    full: 'Application Programming Interface',
+    color: 'var(--api)',
+    ink: 'var(--api-ink)',
+    fill: 'var(--api-fill)',
+    fillStrong: 'var(--api-fill-strong)',
+    tagline: 'Direct system-to-system',
+    bullets: [
+      'Structured systems',
+      'Fast & reliable',
+      'Direct integration',
+      'Scalable',
+      'System-to-system',
+    ],
+    when: 'When systems are structured and accessible via clean interfaces.',
+    speed: 'Days',
+    cost: 'Low',
+    risk: 'Requires API access',
+  },
+};
+
+// ─── Overlap regions ──────────────────────────────
+const OVERLAPS = {
+  'ai-rpa': {
+    label: 'AI + RPA',
+    title: 'Cognitive task automation',
+    body: 'When repetitive UI work also needs judgment — reading invoices, classifying tickets, summarizing screens.',
+  },
+  'ai-api': {
+    label: 'AI + API',
+    title: 'Intelligent workflows',
+    body: 'When structured systems benefit from reasoning — copilot features, smart routing, agentic actions over APIs.',
+  },
+  'rpa-api': {
+    label: 'RPA + API',
+    title: 'Bridge legacy + modern',
+    body: 'When some systems have APIs and others don\u2019t — orchestrate across both with deterministic rules.',
+  },
+  'all': {
+    label: 'All three',
+    title: 'Best-fit automation strategy',
+    body: 'Real-world automation usually combines all three. Pick the right tool per step in the workflow.',
+  },
+};
+
+// ─── Sliders / dimensions ────────────────────────
+// Each slider has 3 stops: left → API, middle → RPA, right → AI
+// scoreContribution returns { rpa, ai, api } weights based on slider value (0..1)
+const DIMENSIONS = [
+  {
+    key: 'data_type',
+    name: 'Data type',
+    desc: 'How structured is the input?',
+    leftLabel: 'Structured',
+    rightLabel: 'Unstructured',
+    score: (v) => ({ api: 1 - v, rpa: 1 - Math.abs(v - 0.45) * 1.3, ai: v }),
+  },
+  {
+    key: 'decision',
+    name: 'Decision complexity',
+    desc: 'Is logic deterministic or judgment-based?',
+    leftLabel: 'Deterministic',
+    rightLabel: 'Judgment-based',
+    score: (v) => ({ api: 1 - v, rpa: 1 - Math.abs(v - 0.45) * 1.3, ai: v }),
+  },
+  {
+    key: 'access',
+    name: 'System access',
+    desc: 'How is the system reachable?',
+    leftLabel: 'APIs available',
+    rightLabel: 'UI only',
+    score: (v) => ({ api: 1 - v, rpa: v, ai: 0.4 + v * 0.2 }),
+  },
+  {
+    key: 'change',
+    name: 'Change frequency',
+    desc: 'How stable is the process?',
+    leftLabel: 'Stable',
+    rightLabel: 'Frequently changing',
+    // Stable favors RPA/API; volatile favors AI
+    score: (v) => ({ api: 1 - v * 0.7, rpa: 1 - v, ai: v }),
+  },
+  {
+    key: 'scale',
+    name: 'Scale & speed',
+    desc: 'What throughput do you need?',
+    leftLabel: 'Moderate',
+    rightLabel: 'High-volume',
+    // High volume favors API; moderate is fine for RPA/AI
+    score: (v) => ({ api: 0.5 + v * 0.5, rpa: 1 - v * 0.6, ai: 0.7 - v * 0.2 }),
+  },
+];
+
+// ─── Recommendation reasoning ────────────────────
+function buildReason(scores, values) {
+  const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const winner = ranked[0][0];
+  const second = ranked[1][0];
+  const margin = ranked[0][1] - ranked[1][1];
+
+  const cues = [];
+  if (winner === 'ai') {
+    if (values.data_type > 0.55) cues.push('unstructured inputs');
+    if (values.decision > 0.55) cues.push('judgment-heavy decisions');
+    if (values.change > 0.55) cues.push('a frequently changing process');
+  }
+  if (winner === 'rpa') {
+    if (values.access > 0.5) cues.push('UI-only system access');
+    if (values.decision < 0.45) cues.push('rule-based decisions');
+    if (values.scale < 0.55) cues.push('moderate throughput');
+  }
+  if (winner === 'api') {
+    if (values.data_type < 0.4) cues.push('structured data');
+    if (values.access < 0.4) cues.push('available APIs');
+    if (values.scale > 0.55) cues.push('high-volume needs');
+  }
+
+  let reason;
+  if (cues.length === 0) {
+    reason = `Scores are close, but ${CATEGORIES[winner].name} edges ahead. Consider combining with ${CATEGORIES[second].name} for hybrid steps.`;
+  } else {
+    const list = cues.length === 1
+      ? cues[0]
+      : cues.slice(0, -1).join(', ') + ' and ' + cues[cues.length - 1];
+    reason = `${CATEGORIES[winner].name} fits because of ${list}.`;
+    if (margin < 0.15) reason += ` Close call — combining with ${CATEGORIES[second].name} may help.`;
+  }
+  return { winner, reason, ranked };
+}
+
+window.CATEGORIES = CATEGORIES;
+window.OVERLAPS = OVERLAPS;
+window.DIMENSIONS = DIMENSIONS;
+window.buildReason = buildReason;
+
+</script>
+  <script type="text/babel">
+// Venn diagram with hover detection per region (single, pair, triple, none)
+// Layout: 3 circles arranged in a triangle (RPA bottom-left, AI top, API bottom-right)
+
+const VennDiagram = () => {
+  const [hover, setHover] = React.useState(null); // 'rpa' | 'ai' | 'api' | 'ai-rpa' | 'ai-api' | 'rpa-api' | 'all' | null
+  const [tooltip, setTooltip] = React.useState({ x: 0, y: 0, visible: false });
+  const stageRef = React.useRef(null);
+
+  // Circle geometry (SVG viewBox: 0 0 600 560)
+  const W = 600, H = 560;
+  const r = 165; // radius
+  const C = {
+    ai:  { cx: 300, cy: 200 },
+    rpa: { cx: 195, cy: 360 },
+    api: { cx: 405, cy: 360 },
+  };
+
+  // Distance check helper
+  const inCircle = (px, py, c) => {
+    const dx = px - c.cx, dy = py - c.cy;
+    return dx * dx + dy * dy <= r * r;
+  };
+
+  const detectRegion = (px, py) => {
+    const inAi = inCircle(px, py, C.ai);
+    const inRpa = inCircle(px, py, C.rpa);
+    const inApi = inCircle(px, py, C.api);
+    const count = inAi + inRpa + inApi;
+    if (count === 0) return null;
+    if (count === 3) return 'all';
+    if (count === 2) {
+      if (inAi && inRpa) return 'ai-rpa';
+      if (inAi && inApi) return 'ai-api';
+      if (inRpa && inApi) return 'rpa-api';
+    }
+    if (inAi) return 'ai';
+    if (inRpa) return 'rpa';
+    if (inApi) return 'api';
+    return null;
+  };
+
+  const handleMove = (e) => {
+    const svg = e.currentTarget;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const local = pt.matrixTransform(ctm.inverse());
+    const region = detectRegion(local.x, local.y);
+    setHover(region);
+
+    // tooltip in stage coordinates (px from container)
+    const stageRect = stageRef.current.getBoundingClientRect();
+    setTooltip({
+      x: e.clientX - stageRect.left,
+      y: e.clientY - stageRect.top,
+      visible: !!region,
+    });
+  };
+
+  const handleLeave = () => {
+    setHover(null);
+    setTooltip(t => ({ ...t, visible: false }));
+  };
+
+  // Tooltip content
+  const tooltipContent = React.useMemo(() => {
+    if (!hover) return null;
+    if (hover === 'rpa' || hover === 'ai' || hover === 'api') {
+      const cat = CATEGORIES[hover];
+      return {
+        label: cat.full,
+        title: cat.name,
+        body: cat.tagline + ' — ' + cat.bullets.slice(0, 3).join(', ').toLowerCase() + '.',
+      };
+    }
+    const o = OVERLAPS[hover];
+    return { label: o.label, title: o.title, body: o.body };
+  }, [hover]);
+
+  const isActive = (key) => {
+    if (!hover) return false;
+    if (hover === key) return true;
+    if (hover === 'all') return key === 'rpa' || key === 'ai' || key === 'api';
+    if (hover === 'ai-rpa') return key === 'ai' || key === 'rpa';
+    if (hover === 'ai-api') return key === 'ai' || key === 'api';
+    if (hover === 'rpa-api') return key === 'rpa' || key === 'api';
+    return false;
+  };
+
+  // Bullet positions (relative to each circle center)
+  const renderBullets = (catKey, anchorX, anchorY, align) => {
+    const cat = CATEGORIES[catKey];
+    const lh = 16;
+    return cat.bullets.map((b, i) => (
+      <text
+        key={b}
+        x={anchorX}
+        y={anchorY + i * lh}
+        className="venn-label-bullet"
+        textAnchor={align}
+      >
+        {'\u2022 ' + b}
+      </text>
+    ));
+  };
+
+  return (
+    <div className="venn-panel">
+      <div className="panel-eyebrow">
+        <span className="num">01</span>
+        <span>The Three Approaches</span>
+        <span className="line"></span>
+        <span style={{ color: 'var(--ink-3)' }}>Hover any region</span>
+      </div>
+
+      <div
+        className={`venn-stage ${hover ? 'has-hover' : ''}`}
+        ref={stageRef}
+      >
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          onMouseMove={handleMove}
+          onMouseLeave={handleLeave}
+        >
+          {/* Circles (fill + stroke) */}
+          <circle
+            className={`venn-circle ${isActive('ai') ? 'is-active' : ''}`}
+            cx={C.ai.cx} cy={C.ai.cy} r={r}
+            fill="var(--ai-fill)"
+            stroke="var(--ai)"
+          />
+          <circle
+            className={`venn-circle ${isActive('rpa') ? 'is-active' : ''}`}
+            cx={C.rpa.cx} cy={C.rpa.cy} r={r}
+            fill="var(--rpa-fill)"
+            stroke="var(--rpa)"
+          />
+          <circle
+            className={`venn-circle ${isActive('api') ? 'is-active' : ''}`}
+            cx={C.api.cx} cy={C.api.cy} r={r}
+            fill="var(--api-fill)"
+            stroke="var(--api)"
+          />
+
+          {/* Title labels for each circle */}
+          <g className={`venn-label-group ${isActive('ai') ? 'is-active' : ''}`}>
+            <text x={300} y={70} className="venn-label-title" textAnchor="middle" fill="var(--ai-ink)">AI</text>
+            {renderBullets('ai', 300, 92, 'middle')}
+          </g>
+
+          <g className={`venn-label-group ${isActive('rpa') ? 'is-active' : ''}`}>
+            <text x={70} y={395} className="venn-label-title" textAnchor="start" fill="var(--rpa-ink)">RPA</text>
+            {renderBullets('rpa', 70, 415, 'start')}
+          </g>
+
+          <g className={`venn-label-group ${isActive('api') ? 'is-active' : ''}`}>
+            <text x={530} y={395} className="venn-label-title" textAnchor="end" fill="var(--api-ink)">API</text>
+            {renderBullets('api', 530, 415, 'end')}
+          </g>
+
+          {/* Overlap labels */}
+          {/* AI + RPA — top-left intersection */}
+          <g className={`venn-label-group ${hover === 'ai-rpa' || hover === 'all' ? 'is-active' : ''}`} style={{ pointerEvents: 'none' }}>
+            <text x={210} y={258} className="venn-overlap-label" textAnchor="middle">AI + RPA</text>
+            <text x={210} y={273} className="venn-overlap-sub" textAnchor="middle">Cognitive task</text>
+            <text x={210} y={285} className="venn-overlap-sub" textAnchor="middle">automation</text>
+          </g>
+
+          {/* AI + API — top-right intersection */}
+          <g className={`venn-label-group ${hover === 'ai-api' || hover === 'all' ? 'is-active' : ''}`} style={{ pointerEvents: 'none' }}>
+            <text x={390} y={258} className="venn-overlap-label" textAnchor="middle">AI + API</text>
+            <text x={390} y={273} className="venn-overlap-sub" textAnchor="middle">Intelligent</text>
+            <text x={390} y={285} className="venn-overlap-sub" textAnchor="middle">workflows</text>
+          </g>
+
+          {/* RPA + API — bottom intersection */}
+          <g className={`venn-label-group ${hover === 'rpa-api' || hover === 'all' ? 'is-active' : ''}`} style={{ pointerEvents: 'none' }}>
+            <text x={300} y={418} className="venn-overlap-label" textAnchor="middle">RPA + API</text>
+            <text x={300} y={433} className="venn-overlap-sub" textAnchor="middle">Bridge legacy</text>
+            <text x={300} y={445} className="venn-overlap-sub" textAnchor="middle">+ modern</text>
+          </g>
+
+          {/* Center — best-fit */}
+          <g className={`venn-label-group ${hover === 'all' ? 'is-active' : ''}`} style={{ pointerEvents: 'none' }}>
+            <circle cx={300} cy={326} r={4} fill="var(--ink)" opacity="0.85" />
+            <text x={300} y={350} className="venn-center" textAnchor="middle">Best-fit</text>
+            <text x={300} y={368} className="venn-center" textAnchor="middle">strategy</text>
+          </g>
+        </svg>
+
+        {/* Tooltip */}
+        {tooltipContent && (
+          <div
+            className={`venn-tooltip ${tooltip.visible ? 'visible' : ''}`}
+            style={{ left: tooltip.x + 'px', top: tooltip.y + 'px' }}
+          >
+            <div className="tt-label">{tooltipContent.label}</div>
+            <div className="tt-title">{tooltipContent.title}</div>
+            <div>{tooltipContent.body}</div>
+          </div>
+        )}
+      </div>
+
+      {/* Legend */}
+      <div className="venn-legend">
+        <div className="legend-item">
+          <span className="legend-dot" style={{ background: 'var(--rpa)' }}></span>
+          <span>RPA — rule-based</span>
+        </div>
+        <div className="legend-item">
+          <span className="legend-dot" style={{ background: 'var(--ai)' }}></span>
+          <span>AI — judgment</span>
+        </div>
+        <div className="legend-item">
+          <span className="legend-dot" style={{ background: 'var(--api)' }}></span>
+          <span>API — direct integration</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+window.VennDiagram = VennDiagram;
+
+</script>
+  <script type="text/babel">
+// Evaluator panel — sliders + recommendation
+const Evaluator = () => {
+  const [values, setValues] = React.useState({
+    data_type: 0.7,
+    decision: 0.6,
+    access: 0.3,
+    change: 0.5,
+    scale: 0.55,
+  });
+  const [lastWinner, setLastWinner] = React.useState(null);
+  const [changed, setChanged] = React.useState(false);
+
+  const setValue = (key, v) => {
+    setValues(prev => ({ ...prev, [key]: v }));
+  };
+
+  // Aggregate scores
+  const { scores, winner, reason, ranked } = React.useMemo(() => {
+    const acc = { rpa: 0, ai: 0, api: 0 };
+    DIMENSIONS.forEach(d => {
+      const s = d.score(values[d.key]);
+      acc.rpa += s.rpa;
+      acc.ai += s.ai;
+      acc.api += s.api;
+    });
+    // normalize to 0..1
+    const max = Math.max(acc.rpa, acc.ai, acc.api, 0.001);
+    const norm = {
+      rpa: acc.rpa / max,
+      ai: acc.ai / max,
+      api: acc.api / max,
+    };
+    const r = buildReason(norm, values);
+    return { scores: norm, ...r };
+  }, [values]);
+
+  // bounce when winner changes
+  React.useEffect(() => {
+    if (lastWinner !== null && lastWinner !== winner) {
+      setChanged(true);
+      const t = setTimeout(() => setChanged(false), 400);
+      return () => clearTimeout(t);
+    }
+    setLastWinner(winner);
+  }, [winner]);
+
+  const winnerCat = CATEGORIES[winner];
+
+  return (
+    <div className="evaluator">
+      <div className="panel-eyebrow">
+        <span className="num">02</span>
+        <span>How to Evaluate</span>
+        <span className="line"></span>
+      </div>
+      <h2>Score the workload.</h2>
+      <p className="evaluator-sub">Move each slider to match your situation. The recommendation updates live.</p>
+
+      {DIMENSIONS.map((d, i) => (
+        <SliderRow
+          key={d.key}
+          dim={d}
+          value={values[d.key]}
+          onChange={(v) => setValue(d.key, v)}
+          index={i + 1}
+        />
+      ))}
+
+      {/* Recommendation */}
+      <div className={`result is-${winner} ${changed ? 'changed' : ''}`}>
+        <div className="result-head">
+          <span className="result-label">Recommendation</span>
+          <span className="result-label" style={{ color: 'var(--ink-2)' }}>
+            {Math.round(scores[winner] * 100)}% fit
+          </span>
+        </div>
+        <div className="result-name">
+          Choose {winnerCat.name}
+          <span className="arrow">→</span>
+        </div>
+        <p className="result-reason">{reason}</p>
+
+        <div className="score-bars">
+          {ranked.map(([k, v]) => (
+            <div className="score-row" key={k}>
+              <span className="score-name">{CATEGORIES[k].name}</span>
+              <div className="score-bar">
+                <div
+                  className={`score-bar-fill s-${k}`}
+                  style={{ width: (v * 100) + '%' }}
+                ></div>
+              </div>
+              <span className="score-val">{Math.round(v * 100)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SliderRow = ({ dim, value, onChange, index }) => {
+  // Determine "active side" for label highlighting
+  const leftActive = value < 0.4;
+  const rightActive = value > 0.6;
+
+  // Visualize fill: from center outward
+  const pct = value * 100;
+  // We render a fill bar whose left/right edges depend on whether v < 0.5 or > 0.5
+  const fillStyle = value >= 0.5
+    ? { left: '50%', width: ((value - 0.5) * 100) + '%', background: 'var(--ink)' }
+    : { left: (value * 100) + '%', width: ((0.5 - value) * 100) + '%', background: 'var(--ink)' };
+
+  return (
+    <div className="slider-row">
+      <div className="slider-head">
+        <div>
+          <div className="slider-name">{dim.name}</div>
+        </div>
+        <span className="slider-num">{String(index).padStart(2, '0')} / 05</span>
+      </div>
+
+      <div className="range-track-wrap">
+        <div className="range-row">
+          <input
+            type="range"
+            min="0" max="1" step="0.01"
+            value={value}
+            onChange={(e) => onChange(parseFloat(e.target.value))}
+          />
+          <div className="range-track">
+            <div className="range-ticks">
+              {[0,1,2,3,4].map(i => (
+                <span key={i} className={`range-tick ${i === 2 ? 'middle' : ''}`}></span>
+              ))}
+            </div>
+            <div className="range-fill" style={fillStyle}></div>
+          </div>
+          <div className="range-thumb" style={{ left: pct + '%' }}></div>
+        </div>
+      </div>
+
+      <div className="range-labels">
+        <span className={leftActive ? 'lab-active' : ''}>{dim.leftLabel}</span>
+        <span className={rightActive ? 'lab-active' : ''}>{dim.rightLabel}</span>
+      </div>
+    </div>
+  );
+};
+
+window.Evaluator = Evaluator;
+
+</script>
+  <script type="text/babel">
+// "Choose" cards + at-a-glance footer
+const ChooseCards = () => {
+  const order = ['api', 'rpa', 'ai'];
+  return (
+    <section className="choose-section">
+      <div className="panel-eyebrow">
+        <span className="num">03</span>
+        <span>When to Pick Each</span>
+        <span className="line"></span>
+      </div>
+      <div className="choose-grid">
+        {order.map((k, i) => {
+          const c = CATEGORIES[k];
+          return (
+            <div className={`choose-card is-${k}`} key={k}>
+              <span className="corner-tag">0{i + 1}</span>
+              <div className={`choose-icon is-${k}`}>
+                <CategoryGlyph kind={k} />
+              </div>
+              <div className="choose-tag">{c.tagline}</div>
+              <h3 className="choose-name">Choose {c.name}</h3>
+              <p className="choose-when">{c.when}</p>
+              <div className="choose-meta">
+                <span><strong>Speed</strong> · {c.speed}</span>
+                <span><strong>Cost</strong> · {c.cost}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+// Simple geometric glyphs (no faux-illustration) — match the editorial flat aesthetic
+const CategoryGlyph = ({ kind }) => {
+  const stroke = 'currentColor';
+  if (kind === 'rpa') {
+    // Concentric squares — gear / repetitive cycle
+    return (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect x="3" y="3" width="14" height="14" rx="1.5" stroke={stroke} strokeWidth="1.5" />
+        <rect x="7" y="7" width="6" height="6" rx="0.5" stroke={stroke} strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (kind === 'ai') {
+    // Diamond + dot — judgment / spark
+    return (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 3 L17 10 L10 17 L3 10 Z" stroke={stroke} strokeWidth="1.5" />
+        <circle cx="10" cy="10" r="1.6" fill={stroke} />
+      </svg>
+    );
+  }
+  // api — two stacked lines connecting (system-to-system)
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <circle cx="5" cy="6" r="2" stroke={stroke} strokeWidth="1.5" />
+      <circle cx="15" cy="14" r="2" stroke={stroke} strokeWidth="1.5" />
+      <path d="M6.5 7.5 L13.5 12.5" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+};
+
+const Glance = () => {
+  const items = [
+    { num: '01', title: 'Match the problem', body: 'Start from the workload\u2019s shape, not from the tooling you already own.' },
+    { num: '02', title: 'Evaluate with evidence', body: 'Score along the five dimensions — data, decisions, access, change, scale.' },
+    { num: '03', title: 'Choose & iterate', body: 'Pick a primary approach, combine where overlaps make sense, revisit quarterly.' },
+  ];
+  return (
+    <section className="glance">
+      <h3 className="glance-title">
+        <small>At a glance</small>
+        A practical method.
+      </h3>
+      {items.map(it => (
+        <div key={it.num}>
+          <div className="glance-item-num">{it.num}</div>
+          <h4 className="glance-item-title">{it.title}</h4>
+          <p className="glance-item-body">{it.body}</p>
+        </div>
+      ))}
+    </section>
+  );
+};
+
+window.ChooseCards = ChooseCards;
+window.Glance = Glance;
+
+</script>
+  <script type="text/babel">
+const App = () => {
+  return (
+    <div className="page">
+      <header className="header">
+        <div>
+          <div className="eyebrow">Framework · 2026</div>
+          <h1 className="title">
+            AI <em>vs</em> RPA <em>vs</em> API
+            <br />
+            — an evaluation model.
+          </h1>
+          <p className="subtitle">
+            Choose the right automation approach for the right problem. Hover the diagram to compare,
+            move the sliders to score your workload.
+          </p>
+        </div>
+        <div className="header-meta">
+          <div>03 SECTIONS</div>
+          <div>05 DIMENSIONS</div>
+          <div>INTERACTIVE</div>
+        </div>
+      </header>
+
+      <main className="main-grid">
+        <VennDiagram />
+        <Evaluator />
+      </main>
+
+      <ChooseCards />
+      <Glance />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+
+</script>
+</body>
+</html>
